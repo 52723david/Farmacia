@@ -1,0 +1,97 @@
+
+/* =========================================================================
+   Primary Styles 
+   ========================================================================== */
+
+
+
+h1, h2, h3 {
+  font-family: 'Courgette', Arial, sans-serif;
+  font-weight: 700;
+  margin: 0;
+}
+
+h1 {
+  font-size: 4em;
+}
+
+h2 a,
+h2 span { font-size: .8em; }
+
+h3 {
+  font-size: 1.1em;
+  margin-bottom: 1em;
+}
+
+h2 span,
+h3 span { color: #AAA; }
+
+p, pre { margin: 0.5em 0 1.5em; }
+
+pre {
+  font-size: .8em;
+  color: #555;
+  background: #EEE;
+  padding: 1.5em 0 1.5em 1.5em;
+
+  -webkit-border-radius: 10px;
+          border-radius: 10px;
+}
+
+
+#wrapper {
+  overflow: hidden;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.follow-btn { width: 169px; margin: 0 auto; }
+
+.example { margin-bottom: 1.5em; }
+
+.example div {
+  float: left;
+  text-align: center;
+  background: #DDD;
+  margin: 10px;
+  padding: 10px;
+}
+
+.sub { font-weight: bold; }
+
+#author {
+  overflow: hidden;
+  margin-bottom: 1.5em;
+}
+
+#author span {
+  display: inline-block;
+  *display: block;
+  zoom: 1;
+  margin-top: 5px;
+}
+
+#resize-graphic {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  opacity: .6;
+}
+
+.footer-ad { width:100%; text-align: center; margin-top: 3em; }
+.footer-ad img { width:100%; max-width: 728px; border: solid 1px #eee; }
+
+
+/* =============================================================================
+   Non-Semantic Helper Classes
+   ========================================================================== */
+
+.ir { display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; *line-height: 0; }
+.ir br { display: none; }
+.hidden { display: none !important; visibility: hidden; }
+.visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
+.invisible { visibility: hidden; }
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; }
+.clearfix { *zoom: 1; }*/
