@@ -82,6 +82,9 @@
   		if ($var1=="productos") {
   			header("location: ../vista/Administrador/administrador.php?va=$var2&var=productos&id=$var");
   		}
+  		if ($var1=="turnos") {
+  			header("location: ../vista/Administrador/administrador.php?va=$var2&var=turnos&id=$var");
+  		}
 	}
 	if (@$_GET["va"]=="actualizar") {
 		extract($_POST);
@@ -89,7 +92,10 @@
 		$var1=$_GET["nom"];
 		$ce=$_GET["io"];
 		$adr=$_GET["ad"];
-		//echo "$adr $var1";
+		$va=$_GET["ced"];
+		$cc=$_GET["ge"];
+		$ccc=$_GET["gege"];
+		//echo "$adr $var1 $va $cc";
 		if ($var1!="usuarios") {
 			$actualizar="update ".$var1." set Id='$adr'";
 		}
@@ -114,19 +120,38 @@
 			$miconexion->consulta($actualizar);
 			header("location: ../vista/Administrador/administrador.php?va=$ce&var=ver");
 		}
+		if ($var1=="productos") {
+			$actualizar=$actualizar." where id='$adr'";
+			//echo "$actualizar";
+			$miconexion->consulta($actualizar);
+			//echo "$adr";
+			header("location: ../vista/Administrador/administrador.php?va=$ced&var=productos&id=$cc");
+			//echo "../vista/Administrador/administrador.php?va=$ced&var=productos&id=$adr";
+		}
+		if ($var1=="turnos") {
+			$actualizar=$actualizar." where id='$adr'";
+			//echo "$actualizar";
+			$miconexion->consulta($actualizar);
+			//echo "$adr";
+			header("location: ../vista/Administrador/administrador.php?va=$ced&var=turnos&id=$ccc");
+			//echo "../vista/Administrador/administrador.php?va=$ced&var=productos&id=$adr";
+		}
 	}
-	if (@$_GET["va"]=="borrar") {
+	if (@$_GET["var"]=="borrar") {
 		$var2=$_GET["var"];
 		$v3=$_GET["id"];
-		$v=$_GET["ht"];
-		$ndf->consulta("delete from ".$var2." where Id=$v3");
-		//echo "delete from ".$var2." where Id='$v3'";
+		$v=@$_GET["ht"];
+		$ta=$_GET["tab"];
+		//echo "$v";
+		$ndf->consulta("delete from ".$ta." where Id=$v3");
+		//echo "delete from ".$ta." where Id='$v3'";
 		$query="select * from farmacia where Id='$v'";
 		//echo "<br>$query";
     	$ndf->consulta($query);
     	$d=$ndf->consulta_lista();
-    	//echo $d[13];
-        header("location: ../vista/Administrador/administrador.php?va=$ce&var=ver");
+    	$ce=$d[13];
+        header("location: ../vista/Administrador/administrador.php?va=$ce&var=$ta&id=$v");
+        //echo "location: ../vista/Administrador/administrador.php?va=$ce&var=$ta&id=$v";
 	}
 	if (@$_GET["var"]=="borrarfarmacia") {
       $ce=$_GET["va"];//numero de cedula
@@ -137,6 +162,24 @@
       echo "<script>if(confirm('¿Seguro que desea borrar a - $rr -?')){
             document.location='admin1.php?var=$r&de=$ce&va=$rrr';}
             else{ document.location='../vista/Administrador/administrador.php?va=$ce&var=ver';}</script>";
+    }
+    if (@$_GET["var"]=="actualizartabla") {
+      //$ce=$_GET["va"];//numero de cedula
+      $rrr=@$_GET["tab"];//nombre de la tabla
+      $r=@$_GET["id"];//el id de la tabla
+      $idtab=@$_GET["ifr"];//el id de la farmacia
+      $idtur=@$_GET["itr"];//el id de turnos
+      if ($rrr=="productos") {
+      	$query="select * from farmacia where Id='$idtab'";
+      }
+      if ($rrr=="turnos") {
+      	$query="select * from farmacia where Id='$idtur'";
+      }
+	  $ndf->consulta($query);
+	  $d=$ndf->consulta_lista();
+	  $us=$d[13];//cedula del usuario
+      //echo "$us $rrr $r $idtab $idtur<br>$query";
+	  header("location: ../vista/Administrador/administrador.php?va=$us&var=actualizar&tab=$rrr&idd=$r");
     }
     //metodo para borrar una farmacia
 	//***************************************************************************//

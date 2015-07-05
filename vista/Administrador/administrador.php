@@ -71,7 +71,7 @@ if ($user=="") {
 							</ul>
 						</li>-->
 						<li>
-							<?php echo "<a href='administrador.php?var=usuario&va=$c'>Detalles de $d2[1]</a>"; ?>
+							<?php echo "<a href='administrador.php?var=usuario&va=$c&nom=usuarios'>Detalles de $d2[1]</a>"; ?>
 						</li>
 						<li>
 							<?php echo "<a href='administrador.php?var=ingresarFarmacia&va=$c'>Crear Farmacia</a>"; ?>
@@ -217,7 +217,7 @@ if ($_GET["var"]=="actualizarFarmacia")	{
 		$query="select * from $nomTabla where Cedula='$idr'";
 	}
 	$ndf->consulta($query);
-	$ndf->actualizar($nomTabla);
+	$ndf->actualizar($nomTabla, "kcnfnjew");
 }
 if ($_GET["var"]=="detalle") {
 	//echo $_GET["r"], $_GET["t"];
@@ -239,33 +239,53 @@ if (@$_GET["var"]=="actualizar") {
 	$nomTabla=$_GET["tab"];
     //$nomTabla=$_GET["tab"];
     $idr=$_GET["va"];
-    //echo "$idr";
-    $query="select * from usuarios where Cedula='$idr'";
-    //echo "$query";
+    $idrr=@$_GET["idd"];
+    //echo "$idr $idrr $nomTabla<br>";
+    if ($nomTabla!="productos" and $nomTabla!="turnos") {
+    	$query="select * from $nomTabla where Cedula='$idr'";
+    	//echo "$query";
+    }
+    if ($nomTabla=="productos" or $nomTabla=="turnos") {
+    	$query="select * from $nomTabla where Id='$idrr'";
+    	//echo "$query";
+    }
     $ndf->consulta($query);
-    $ndf->actualizar($nomTabla);
+    $ndf->actualizar($nomTabla, $c);
 }
-if ($_GET["var"]=="productos") {
+if ($_GET["var"]=="productos" or $_GET["var"]=="turnos") {
 	$idd=$_GET["id"];
-	$query="select * from productos where Farmacia='$idd'";
+	$nomm=$_GET["var"];
+	$query="select * from $nomm where Farmacia='$idd'";
     //echo "$query";
     $ndf->consulta($query);
     $d=$ndf->consulta_lista();
-    echo "<div class='boton1'>";
-    $query="select * from productos where Farmacia='$idd'";
-    $ndf->consulta($query);
-    $far=@$d[9];
-    //echo $far;
-    echo "<a href='administrador.php?va=$c&var=ingresar&nom=productos&fa=$far'>Ingresar un producto</a>";
-    //echo "$c";
-    echo "</div>";
+    if ($_GET["var"]=="productos") {
+    	echo "<div class='boton1'>";
+    	$query="select * from $nomm where Farmacia='$idd'";
+    	$ndf->consulta($query);
+    	$far=@$d[9];
+    	//echo $nomm;
+    	echo "<a href='administrador.php?va=$c&var=ingresar&nom=$nomm&fa=$far'>Ingresar un producto</a>";
+    	//echo "$c";
+    	echo "</div>";
+    }
+    if ($_GET["var"]=="turnos") {
+    	echo "<div class='boton1'>";
+    	$query="select * from $nomm where Farmacia='$idd'";
+    	$ndf->consulta($query);
+    	$far=@$d[3];
+    	//echo $nomm;;
+    	echo "<a href='administrador.php?va=$c&var=ingresar&nom=$nomm&fa=$far'>Ingresar un turno</a>";
+    	//echo "$c";
+    	echo "</div>";
+    }
     if ($d>0) {
-    	$query="select * from productos where Farmacia='$idd'";
+    	$query="select * from $nomm where Farmacia='$idd'";
     	$ndf->consulta($query);
     	$ndf->verconsulta("hucdshuh", "uduhshdd", "nhhjdd");
     } else {
     	$far=$idd;
-		header("location: administrador.php?va=$c&var=ingresar&nom=productos&fa=$far");
+		header("location: administrador.php?va=$c&var=ingresar&nom=$nomm&fa=$far");
     }
 }
 if (@$_GET["var"]=="ingresar") {

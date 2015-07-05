@@ -95,6 +95,8 @@ class clase_mysql{
 			$cer=$row[0];
 			$tabla = mysql_field_table ( $this->consulta_ID, 0);
 			$nom=$row[1];
+			$idfar=@$row[9];
+			$idtur=@$row[3];
 			//echo "$cer"; 
 			//echo "<td><a href='../view/menu/usuario.php?id=$row[0]&var=actualizar&va=$t&tab=$tabla'>Actualizar</a></td>";
 			//echo "<td><a href='../controller/admin1.php?id=$row[0]&va=borrar&var=$tabla&ht=$us'>Borrar</a></td>";
@@ -105,8 +107,14 @@ class clase_mysql{
 					<li><a href="">Opciones</a>
 						<ul>
 						<?php
+						if ($tabla!="productos" and $tabla!="turnos") {
 							echo "<li><a href='administrador.php?id=$row[0]&var=actualizar&va=$cer&tab=$tabla'>Actualizar</a>";
 							echo "<li><a href='../../controlador/admin1.php?id=$row[0]&va=$cer&var=borrarfarmacia&tab=$tabla&nomb=$nom'>Borrar</a>";
+						}
+						if ($tabla=="productos" or $tabla=="turnos") {
+							echo "<li><a href='../../controlador/admin1.php?id=$row[0]&var=actualizartabla&va=$cer&tab=$tabla&ifr=$idfar&itr=$idtur'>Actualizar</a>";
+							echo "<li><a href='../../controlador/admin1.php?id=$row[0]&va=$cer&var=borrar&tab=$tabla&nomb=$nom&ht=$us'>Borrar</a>";
+						}
 						?>
 						</ul>
 					</li>
@@ -183,7 +191,7 @@ class clase_mysql{
 						<ul>
 						<?php
 							echo "<li><a href='administrador.php?id=$ID&var=productos&va=$CE'>Productos</a>";
-							echo "<li><a href=''>Turnos</a>";
+							echo "<li><a href='administrador.php?id=$ID&var=turnos&va=$CE'>Turnos</a>";
 							echo "<li><a href='../Administrador/administrador.php?var=detalle&r=$ID&t=$tabla&va=$CE'>Detalles</a>";
 							echo "<li><a href='../Administrador/administrador.php?id=$row[0]&var=actualizarFarmacia&va=$user&tab=$tabla'>Actualizar</a>";
 							echo "<li><a href='../../controlador/admin1.php?id=$row[0]&va=$user&var=borrarfarmacia&tab=$tabla&nomb=$nom'>Borrar</a>";
@@ -227,12 +235,15 @@ class clase_mysql{
 		  echo "<script>location.href='../vista/Login/login.php'</script>";
 		}
 	}
-	function actualizar($sd){
+	function actualizar($sd, $ce){
       while ($row=mysql_fetch_array($this->consulta_ID)) {
       	$c=@$row[13];
+      	$cc=@$row[9];
+      	$ccc=@$row[3];
+      	//echo "$ce";
       	echo "<div class='wrapper'>";
 		echo "<div id='main' style='padding:50px 0 0 0;'>";
-        echo @"<form id='contact-form' action='../../controlador/admin1.php?va=actualizar&nom=$sd&io=$c&ad=$row[0]' method='post'>";
+        echo @"<form id='contact-form' action='../../controlador/admin1.php?va=actualizar&nom=$sd&io=$c&ad=$row[0]&ced=$ce&ge=$cc&gege=$ccc' method='post'>";
         for ($i=0; $i < $this->numcampos(); $i++) { 
           if ($this->nombrecampo($i)=="Id" or $this->nombrecampo($i)=="Usuario" or $this->nombrecampo($i)=="Farmacia" or $this->nombrecampo($i)=="Password") {
             echo "<input type='hidden' name='".$this->nombrecampo($i)."'value='".$row[$i]."'>";
