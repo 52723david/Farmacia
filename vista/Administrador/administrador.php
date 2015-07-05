@@ -264,13 +264,14 @@ if ($_GET["var"]=="productos") {
     	$ndf->consulta($query);
     	$ndf->verconsulta("hucdshuh", "uduhshdd", "nhhjdd");
     } else {
+    	$far=$idd;
 		header("location: administrador.php?va=$c&var=ingresar&nom=productos&fa=$far");
     }
 }
 if (@$_GET["var"]=="ingresar") {
 	$nomb=$_GET["nom"];
 	$farma=$_GET["fa"];
-	echo $farma, $nomb;
+	//echo $farma, $nomb;
 	$query="select * from $nomb";
     $ndf->consulta($query);
 	echo "<div class='wrapper'>";
