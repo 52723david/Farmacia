@@ -27,7 +27,6 @@
 
 		$query="select * from usuarios where Usuario=MD5('$Usuario')";
 		//echo "$query";
-	
 		$ndf->consulta($query);
 	    $d2=$ndf->consulta_lista();
 	    if ($d2>0) {

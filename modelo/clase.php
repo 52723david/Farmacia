@@ -228,7 +228,7 @@ class clase_mysql{
 		  if ($r=="user") {
 		  	echo "<script>location.href='../vista/Administrador/administrador.php?va=$cedula&var=ver'</script>";
 		  }else{
-		  	echo "<script>location.href='../view/admin.php?va=$cedula'</script>";
+		  	echo "<script>location.href='../vista/Administrador/admin.php?va=$cedula'</script>";
 		  }
 		}else{
 		  echo "<script>alert('usuario y contraseña ingresados incorrectos')</script>";
