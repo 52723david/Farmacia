@@ -61,7 +61,7 @@ session_destroy();
   </div>
   <div class='register'>
     <h2>Crear una cuenta</h2>
-    <form action="../../controller/admin1.php?va=registrarse" method="post" name="form">
+    <form action="../../controlador/admin1.php?va=registrarse" method="post" name="form">
         <table>
           <tr>
             <td><p></p></td>
@@ -77,7 +77,7 @@ session_destroy();
           </tr>
           <tr>
             <td><p></p></td>
-            <td><input type="text" name="Foto" placeholder="Foto"></td>
+            <td><input type="file" name="Foto"></td>
           </tr>
           <tr>
             <td><p></p></td>

@@ -7,7 +7,7 @@
 	if (@$_GET["va"]=="loguin" and $_POST['tipo']=="user") {
 		$usuario1 = $_POST['usuario'];
 		$clave1 = $_POST['clave'];
-		$query="select * from usuarios where Usuario='$usuario1' and Password='$clave1'";
+		$query="select * from usuarios where Usuario=MD5('$usuario1') and Password=MD5('$clave1')";
 		//echo "$query";
 		$ndf->consulta($query);
 		$ndf->validar($_POST['tipo']);
@@ -25,18 +25,23 @@
 		extract($_POST);
 		/*$usuario1 = $_POST['usuario'];*/
 
-		$query="select * from usuarios where Usuario='$Usuario'";
+		$query="select * from usuarios where Usuario=MD5('$Usuario')";
 		//echo "$query";
 	
 		$ndf->consulta($query);
 	    $d2=$ndf->consulta_lista();
 	    if ($d2>0) {
 	    	echo "<script>alert('El usuario ya exite.')</script>";
-		    echo "<script>location.href='../view/Login/login.php'</script>";
+		    echo "<script>location.href='../vista/Login/login.php'</script>";
 	    }else{
-		$sql="insert into usuarios values ('$Cedula', '$Nombres', '$Apellidos', '$Foto', '$Mail', '$Celular', '$Usuario', '$Password')";
+	    if (@$_FILES['archivo']["error"] > 0) {
+      				echo "Error: " . $_FILES['archivo']['error'] . "<br>";
+ 		} else {
+    		move_uploaded_file(@$_FILES['archivo']['tmp_name'],"../photo/".@$_FILES['archivo']['name']);
+ 		}
+		$sql="insert into usuarios values ('$Cedula', '$Nombres', '$Apellidos', '$Foto', '$Mail', '$Celular', MD5('$Usuario'), MD5('$Password'))";
 		$ndf->consulta($sql);
-		echo "<script>location.href='../view/Login/login.php'</script>";
+		echo "<script>location.href='../vista/Login/login.php'</script>";
 	    }
 	}
 	

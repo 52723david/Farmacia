@@ -70,7 +70,7 @@
 					<a href="index.php"><img src="images/logo.png"></a>	
 				</div>
 				<div class="logo_login">
-					<a href="../Login/login.php"><img src="images/login.png" width="100" heigth="100"></a>
+					<a target="_blank" href="../Login/login.php"><img src="images/login.png" width="100" heigth="100"></a>
 				</div>
 				<div class="buscador">
 					<fieldset class="searchform">
