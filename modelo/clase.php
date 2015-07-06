@@ -107,12 +107,16 @@ class clase_mysql{
 					<li><a href="">Opciones</a>
 						<ul>
 						<?php
-						if ($tabla!="productos" and $tabla!="turnos") {
+						if ($tabla!="productos" and $tabla!="turnos" and $f!="admin") {
 							echo "<li><a href='administrador.php?id=$row[0]&var=actualizar&va=$cer&tab=$tabla'>Actualizar</a>";
 							echo "<li><a href='../../controlador/admin1.php?id=$row[0]&va=$cer&var=borrarfarmacia&tab=$tabla&nomb=$nom'>Borrar</a>";
 						}
 						if ($tabla=="productos" or $tabla=="turnos") {
 							echo "<li><a href='../../controlador/admin1.php?id=$row[0]&var=actualizartabla&va=$cer&tab=$tabla&ifr=$idfar&itr=$idtur'>Actualizar</a>";
+							echo "<li><a href='../../controlador/admin1.php?id=$row[0]&va=$cer&var=borrar&tab=$tabla&nomb=$nom&ht=$us'>Borrar</a>";
+						}
+						if ($f=="admin") {
+							echo "<li><a href='admin.php?id=$row[0]&var=actualizar&va=$cer&tab=$tabla'>Actualizar</a>";
 							echo "<li><a href='../../controlador/admin1.php?id=$row[0]&va=$cer&var=borrar&tab=$tabla&nomb=$nom&ht=$us'>Borrar</a>";
 						}
 						?>
@@ -235,15 +239,20 @@ class clase_mysql{
 		  echo "<script>location.href='../vista/Login/login.php'</script>";
 		}
 	}
-	function actualizar($sd, $ce){
+	function actualizar($sd, $ce, $tipo){
       while ($row=mysql_fetch_array($this->consulta_ID)) {
       	$c=@$row[13];
       	$cc=@$row[9];
       	$ccc=@$row[3];
-      	//echo "$ce";
+      	//echo "$tipo";
       	echo "<div class='wrapper'>";
 		echo "<div id='main' style='padding:50px 0 0 0;'>";
-        echo @"<form id='contact-form' action='../../controlador/admin1.php?va=actualizar&nom=$sd&io=$c&ad=$row[0]&ced=$ce&ge=$cc&gege=$ccc' method='post'>";
+		if ($tipo=="admin") {
+			echo @"<form id='contact-form' action='../../controlador/admin2.php?va=actualizar&nom=$sd&io=$c&ad=$row[0]&ced=$ce&ge=$cc&gege=$ccc' method='post'>";
+		}
+		if ($tipo!="admin") {
+			echo @"<form id='contact-form' action='../../controlador/admin1.php?va=actualizar&nom=$sd&io=$c&ad=$row[0]&ced=$ce&ge=$cc&gege=$ccc' method='post'>";
+		}
         for ($i=0; $i < $this->numcampos(); $i++) { 
           if ($this->nombrecampo($i)=="Id" or $this->nombrecampo($i)=="Usuario" or $this->nombrecampo($i)=="Farmacia" or $this->nombrecampo($i)=="Password") {
             echo "<input type='hidden' name='".$this->nombrecampo($i)."'value='".$row[$i]."'>";

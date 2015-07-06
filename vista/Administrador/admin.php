@@ -48,15 +48,16 @@ if ($user=="") {
 						<li>
 							<a href="">Tablas</a>
 							<ul>
-								<li><a href="#">Administrador</a></li>
-								<li><a href="#">Farmacia</a></li>
-								<li><a href="#">Productos</a></li>
-								<li><a href="#">Turnos</a></li>
-								<li><a href="#">Usuarios</a></li>
+							<?php
+								echo "<li><a href='admin.php?var=administradortodo&va=$c&nom=farmacia'>Farmacia</a></li>";
+								echo "<li><a href='#'>Productos</a></li>";
+								echo "<li><a href='#'>Turnos</a></li>";
+								echo "<li><a href='#'>Usuarios</a></li>";
+							?>
 							</ul>
 						</li>
 						<li>
-							<?php echo "<a href='admin.php?var=usuario&va=$c&nom=usuarios'>Detalles de $d2[1]</a>"; ?>
+							<?php echo "<a href='admin.php?var=administrador&va=$c&nom=usuarios'>Detalles de $d2[1]</a>"; ?>
 						</li>
 						<li>
 							<a href="../../controlador/admin1.php?va=salir">Salir</a>
@@ -65,13 +66,76 @@ if ($user=="") {
 		<!--Fin menu-->
 		<!--Tabla-->
 <?php 
-if (@$_GET["var"]=="usuario") {
+if (@$_GET["var"]=="administrador") {
     //$nomTabla=$_GET["tab"];
     $idr=$_GET["va"];
     $query="select * from administrador where Cedula='$idr'";
     //echo "$query";
     $ndf->consulta($query);
-    $ndf->verconsulta("hucdshuh", "uduhshdd", "$idr");
+    $ndf->verconsulta("hucdshuh", "admin", "$idr");
+}
+if (@$_GET["var"]=="administradortodo") {
+	$nomm=$_GET["nom"];
+	echo "<div class='boton1'>";
+    $query="select * from $nomm";
+    $ndf->consulta($query);
+    $far=@$d[9];
+    //echo $nomm;
+    echo "<a href='admin.php?va=$c&var=ingresar&nom=$nomm&fa=$far'>Ingresar nuevo $nomm</a>";
+    //echo "$c";
+    echo "</div>";
+    //$nomTabla=$_GET["tab"];
+    $idr=$_GET["va"];
+    $query="select * from $nomm";
+    //echo "$query";
+    $ndf->consulta($query);
+    $ndf->verconsulta("$c", "admin", "$idr");
+}
+if (@$_GET["var"]=="ingresar") {
+	$nomb=$_GET["nom"];
+	$farma=$_GET["fa"];
+	//echo $farma;
+	$query="select * from $nomb";
+	//echo "$query";
+    $ndf->consulta($query);
+	echo "<div class='wrapper'>";
+	echo "<div id='main' style='padding:50px 0 0 0;'>";
+    echo "<form id='contact-form' action='../../controlador/admin2.php?va=ingresar&v=$nomb&f=$c&idd=$farma&ce=$c' method='post' name='contact_form'>";
+	    for ($i=0; $i < $ndf->numcampos(); $i++) { 
+		    if ($ndf->nombrecampo($i)=="Id") {
+		        echo "<input type='hidden' name='".$ndf->nombrecampo($i)."'>";
+		    }
+		    if ($ndf->nombrecampo($i)!="Id" and $ndf->nombrecampo($i)!="Foto" and $ndf->nombrecampo($i)!="Farmacia") {
+		        echo "<input type='text' name='".$ndf->nombrecampo($i)."'placeholder='".$ndf->nombrecampo($i)."'>";
+		    }
+		    if ($ndf->nombrecampo($i)=="Foto") {
+		        echo "<input type='file' name='".$ndf->nombrecampo($i)."'>";
+		    }
+		    if ($ndf->nombrecampo($i)=="Farmacia") {
+		        echo "<input type='hidden' name='".$ndf->nombrecampo($i)."' value='$farma'>";
+		    }
+	    }
+	echo "<input type='submit' id='boton' name='btn_enviar' value='Enviar'>";
+	echo "</form>";
+	echo "</div>";
+	echo "</div>";
+}
+if (@$_GET["var"]=="actualizar") {
+	$nomTabla=$_GET["tab"];
+    //$nomTabla=$_GET["tab"];
+    $idr=$_GET["va"];
+    $idrr=@$_GET["idd"];
+    //echo "$idr $idrr $nomTabla<br>";
+    if ($nomTabla!="productos" and $nomTabla!="turnos") {
+    	$query="select * from $nomTabla where Cedula='$idr'";
+    	//echo "$query";
+    }
+    if ($nomTabla=="productos" or $nomTabla=="turnos") {
+    	$query="select * from $nomTabla where Id='$idrr'";
+    	//echo "$query";
+    }
+    $ndf->consulta($query);
+    $ndf->actualizar($nomTabla, $c, "admin");
 }
  ?>
 <!--Tabla-->
