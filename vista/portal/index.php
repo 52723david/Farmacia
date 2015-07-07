@@ -74,9 +74,12 @@
 				</div>
 				<div class="buscador">
 					<fieldset class="searchform">
-						<input type="text" value="Buscar..." class="searchfield" onfocus="if (this.value == 'Buscar...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Buscar...';}"/> 
-						<input type="button" value="Ir" class="searchbutton"/>
-					</fieldset>
+				<form id="buscador" name="buscador" method="post" action="../../controlador/admin1.php?va=buscar">
+					<input type="text" name="busca"placeholder="Buscar..." class="searchfield"> 
+					<input type="submit" value="Ir" class="searchbutton">
+   			 	</form>
+
+			</fieldset>
 				</div>		
 			</header>
 			<div id="slider">
