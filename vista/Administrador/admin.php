@@ -15,7 +15,7 @@ if ($user=="") {
 	<title>Administrador</title>
 
 	<html lang="es">
-
+	<script src="js/prefixfree.min.js " type="text/javascript"></script>
 	<link rel="stylesheet" type="text/css" href="estilos/estilos.css">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<script type="text/javascript" src="js/jquery.js"></script>
@@ -68,7 +68,7 @@ if ($user=="") {
 					</ul>
 					
 					<fieldset class="searchform">
-				<form id="buscador" name="buscador" method="post" action="../../controlador/admin1.php?va=buscar">
+				<?php  echo "<form id='buscador'  name='buscador' method='post' action='admin.php?var=buscar&va=$c'>"; ?>
 					<input type="text" name="busca"placeholder="Buscar..." class="searchfield"> 
 					<input type="submit" value="Ir" class="searchbutton">
    			 	</form>
@@ -152,6 +152,56 @@ if (@$_GET["var"]=="actualizar") {
     }
     $ndf->consulta($query);
     $ndf->actualizar($nomTabla, $c, "admin");
+}
+
+if (@$_GET["var"]=="buscar") {
+	$buscar=$_POST["busca"];
+	$ced=$_GET["va"];
+	//echo $buscar;
+	//header("location: ../../controlador/admin1.php?va=buscar&ce=$ced&busca=$buscar");
+	$ve=$buscar;
+		//echo $ve."<br>";
+		$busqueda = trim($ve);
+		//echo $busqueda;
+		if (empty($busqueda)){
+	  		//$texto = 'Búsqueda sin resultados';
+	  		echo "<script>alert('Ingrese palabra a buscar')</script>";
+			echo "<script>location.href='../vista/portal/index.php'</script>";
+	  		//echo $texto;
+  		}else{
+  			$ndf->buscar($busqueda);
+  			?>
+  			<div class="todo">
+		<section class="seccion">
+			<article>
+				<h1><center>Farmacia Jerusalen<center></h1>
+				<h3>Nombre:</h3>
+				<h3>Precio</h3>
+				<h3>Oferta</h3>
+				<h3>Farmacia</h3>
+				
+			</article>
+		</section>
+		<aside class="sec_foto">
+			<div class="widget">
+				<div class="imagen">
+					<img src="img/imagen5.jpg">
+					<h3>Latitud:</h3>
+					<h5>-45246523</h5>
+					<h3>Longitud:</h3>
+					<h5>-74630332</h5>
+					<h3>Zona:</h3>
+				<h5>7</h5>
+				</div>
+
+			</div>
+		</aside>
+	</div>
+  			<?php 
+
+
+
+  		}
 }
  ?>
 <!--Tabla-->

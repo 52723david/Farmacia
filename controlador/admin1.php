@@ -226,7 +226,7 @@
 		header("location: ../vista/Login/login.php");
 	}
 	if ($_GET["va"]=="buscar") {
-		$ve=$_POST["busca"];
+		$ve=$_GET["busca"];
 		//echo $ve."<br>";
 		$busqueda = trim($ve);
 		//echo $busqueda;
