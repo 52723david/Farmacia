@@ -45,33 +45,8 @@ if ($user=="") {
 						<li  class="test">
 							<?php echo "<a href='administrador.php?var=ver&va=$c'>Inicio</a>"; ?>
 						</li>
-						<!--<li>
-							<a href="#">Sweaters</a>
-							<ul>
-								<li>
-									<a href="#">Mens</a>
-									<ul>
-										<li><a href="#">Wool</a></li>
-										<li><a href="#">Knitwear</a></li>
-										<li><a href="#">Light Sweaters</a></li>
-										<li><a href="#">Cardigans</a></li>
-										<li><a href="#">Hoodies</a></li>
-									</ul>
-								</li>
-								<li>
-									<a href="#">Womens</a>
-									<ul>
-										<li><a href="#">Wool</a></li>
-										<li><a href="#">Knitwear</a></li>
-										<li><a href="#">Light Sweaters</a></li>
-										<li><a href="#">Cardigans</a></li>
-										<li><a href="#">Hoodies</a></li>
-									</ul>
-								</li>
-							</ul>
-						</li>-->
 						<li>
-							<?php echo "<a href='administrador.php?var=usuario&va=$c&nom=usuarios'>Detalles de $d2[1]</a>"; ?>
+							<?php echo "<a href='administrador.php?var=Detalles&va=$c&nom=usuarios'>Detalles de $d2[1]</a>"; ?>
 						</li>
 						<li>
 							<?php echo "<a href='administrador.php?var=ingresarFarmacia&va=$c'>Crear Farmacia</a>"; ?>
@@ -80,76 +55,6 @@ if ($user=="") {
 							<a href="../../controlador/admin1.php?va=salir">Salir</a>
 						</li>
 					</ul>
-		<!--Fin menu-->
-		<!--Tabla-->
-   <!--<table id="card-table" class="table">
-		<thead>
-			<tr>
-				<th width="30%">Name</th>
-				<th width="30%">Phone</th>
-				<th width="30%">Info</th>
-				<th width="10%">Actions</th>   
-			</tr>
-		</thead> 
-	 <tbody>
-	  <tr>
-	    <td>
-	      Greg
-	    </td>
-	    <td>
-	      555-555-5555
-	    </td>
-	    <td>
-	      This is an example
-	    </td>
-	    <td>
-	      <a href="#">Edit</a>
-	    </td>
-	  </tr>
-	  <tr>
-	    <td>
-	      Greg
-	    </td>
-	    <td>
-	      555-555-5555
-	    </td>
-	    <td>
-	      This is an example
-	    </td>
-	    <td>
-	      <a href="#">Edit</a>
-	    </td>
-	  </tr>
-	  <tr>
-	    <td>
-	      John
-	    </td>
-	    <td>
-	      444-444-4444
-	    </td>
-	    <td>
-	      Tables are cool
-	    </td>
-	    <td>
-	      <a href="#">Edit</a>
-	    </td>
-	  </tr>
-	  <tr>
-	    <td>
-	      John
-	    </td>
-	    <td>
-	      344-444-4444
-	    </td>
-	    <td>
-	      Tables are cool
-	    </td>
-	    <td>
-	      <a href="#">Edit</a>
-	    </td>
-	  </tr>
-	 </tbody>
-</table>--> 
 <?php 
 if ($_GET["var"]=="ver") {
 	$query="select * from farmacia where Usuario='$c'";
@@ -322,50 +227,83 @@ if (@$_GET["var"]=="ingresar") {
 	echo "</div>";
 	echo "</div>";
 }
+if (@$_GET["var"]=="Detalles") {
+	$var=$_GET["var"];//evento
+	$va=$_GET["va"];//cedula
+	$nom=$_GET["nom"];//tabla
+	$query="select * from $nom where Cedula='$va'";
+	//echo "$query";
+    $ndf->consulta($query);
+    $d=$ndf->consulta_lista();
+    $nombre=$d[1];
+	//echo "$var $va $nom";
+	echo "<br><br><br>";
+  			?>
+  			<div class="todo">
+		<section class="seccion">
+			<article>
+				<h1><center><?php echo $nombre; ?><center></h1>
+				<h3><?php echo $nombre; ?></h3>
+				<h3><?php echo $d[2]; ?></h3>
+				<h3><?php echo $d[4]; ?></h3>
+				
+			</article>
+		</section>
+		<aside class="sec_foto">
+			<div class="widget">
+				<div class="imagen">
+					<img src="img/indice.jpeg">
+				</div>
+
+			</div>
+		</aside>
+	</div>
+  			<?php 
+}
+if (@$_GET["var"]=="Detalles1") {
+	$var=$_GET["r"];//id
+	$va=$_GET["va"];//cedula
+	$nom=$_GET["t"];//tabla
+	$query="select * from $nom where Id='$var'";
+	//echo "$query";
+    $ndf->consulta($query);
+    $d=$ndf->consulta_lista();
+    $nombre=$d[1];
+    $img=$d[2];
+	//echo "$var $va $nom";
+	echo "<br><br><br>";
+  			?>
+  			<div class="todo">
+		<section class="seccion">
+			<article>
+				<h1><center><?php echo $nombre; ?><center></h1>
+				<h3><?php echo $nombre; ?></h3>
+				<h3><?php echo $d[3]; ?></h3>
+				<h3><?php echo $d[4]; ?></h3>
+				<h3><?php echo $d[5]; ?></h3>
+				<h3><?php echo $d[6]; ?></h3>
+				<h3><?php echo $d[7]; ?></h3>
+				<h3><?php echo $d[10]; ?></h3>
+				
+			</article>
+		</section>
+		<aside class="sec_foto">
+			<div class="widget">
+				<div class="imagen">
+					<?php echo "<img src='../images/$img'>"; ?>
+					<h3><?php echo $d[8]; ?></h3>
+					<h3><?php echo $d[9]; ?></h3>
+					<h3><?php echo $d[11]; ?></h3>
+					<h3><?php echo $d[12]; ?></h3>
+					<h3><?php echo $d[13]; ?></h3>
+				</div>
+
+			</div>
+		</aside>
+	</div>
+  			<?php 
+}
  ?>
-<!--Tabla-->
-<!--<div class="wrapper">
-		<div id="main" style="padding:50px 0 0 0;">	-->
-		<!-- Form -->
-		<!--<form id="contact-form" action="/" method="post">
-			<h3>Nueva Farmacia</h3>
-			<div>
-				<label>
-					<span>Nombre: </span>
-					<input placeholder="nombre" type="text" tabindex="1" required autofocus>
-				</label>
-			</div>
-			<div>
-				<label>
-					<span>Email: </span>
-					<input placeholder="email" type="email" tabindex="2" required>
-				</label>
-			</div>
-			<div>
-				<label>
-					<span>Telefono: </span>
-					<input placeholder="telefono" type="tel" tabindex="3" required>
-				</label>
-			</div>
-			<div>
-				<label>
-					<span>Sitio: </span>
-					<input placeholder="Sitio" type="url" tabindex="4" required>
-				</label>
-			</div>
-			<div>
-				<label>
-					<span>Mensaje: </span>
-					<textarea placeholder="descripcion" tabindex="5" required></textarea>
-				</label>
-			</div>
-			<div>
-				<button name="submit" type="submit" id="contact-submit">Registrar</button>
-			</div>
-		</form>-->
-		<!-- /Form -->	
-		<!--</div>
-</div>-->
 </div><!--fin content-->
 </div><!--fin container-->
 	

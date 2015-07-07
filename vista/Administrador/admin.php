@@ -17,7 +17,6 @@ if ($user=="") {
 	<html lang="es">
 	<script src="js/prefixfree.min.js " type="text/javascript"></script>
 	<link rel="stylesheet" type="text/css" href="estilos/estilos.css">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<meta name="viewport" content="width=device-width">
 	<link href="estilos/stacktable.css" rel="stylesheet" />
@@ -38,6 +37,15 @@ if ($user=="") {
 			echo "<div class='logo'><a href='admin.php?var=ver&va=$c'>Bienvenido $d2[1] $d2[2]</a></div>";
 		 ?>
 		<div class="logo1"><a href="../../controlador/admin1.php?va=salir">Salir</a></div>
+		<div class="logo1">
+		<fieldset class="searchform">
+				<?php  echo "<form id='buscador'  name='buscador' method='post' action='admin.php?var=buscar&va=$c'>"; ?>
+					<input type="text" name="busca"placeholder="Buscar..." class="searchfield"> 
+					<input type="submit" value="Ir" class="searchbutton">
+   			 	</form>
+
+		</fieldset>
+		</div>
 	</div>
 	<div class="container">
 		<div class="content">
@@ -60,20 +68,12 @@ if ($user=="") {
 							</ul>
 						</li>
 						<li>
-							<?php echo "<a href='admin.php?var=administrador&va=$c&nom=usuarios'>Detalles de $d2[1]</a>"; ?>
+							<?php echo "<a href='admin.php?var=Detalles&va=$c&nom=administrador'>Detalles de $d2[1]</a>"; ?>
 						</li>
 						<li>
 							<a href="../../controlador/admin1.php?va=salir">Salir</a>
 						</li>
 					</ul>
-					
-					<fieldset class="searchform">
-				<?php  echo "<form id='buscador'  name='buscador' method='post' action='admin.php?var=buscar&va=$c'>"; ?>
-					<input type="text" name="busca"placeholder="Buscar..." class="searchfield"> 
-					<input type="submit" value="Ir" class="searchbutton">
-   			 	</form>
-
-			</fieldset>
 				
 		<!--Fin menu-->
 		<!--Tabla-->
@@ -88,6 +88,7 @@ if (@$_GET["var"]=="administrador") {
 }
 
 if (@$_GET["var"]=="administradortodo") {
+	header('Content-Type: text/html; charset=ISO-8859-1');
 	$nomm=$_GET["nom"];
 	echo "<div class='boton1'>";
     $query="select * from $nomm";
@@ -231,42 +232,120 @@ if (@$_GET["var"]=="buscar") {
 		if (empty($busqueda)){
 	  		//$texto = 'Búsqueda sin resultados';
 	  		echo "<script>alert('Ingrese palabra a buscar')</script>";
-			echo "<script>location.href='../vista/portal/index.php'</script>";
+			echo "<script>location.href='admin.php?va=$c'</script>";
 	  		//echo $texto;
   		}else{
-  			$ndf->buscar($busqueda);
+  			$ndf->buscar($busqueda, $c);
+  		}
+}
+if (@$_GET["var"]=="Detalles") {
+	$var=$_GET["var"];//evento
+	$va=$_GET["va"];//cedula
+	$nom=$_GET["nom"];//tabla
+	$query="select * from $nom where Cedula='$va'";
+	//echo "$query";
+    $ndf->consulta($query);
+    $d=$ndf->consulta_lista();
+    $nombre=$d[1];
+	//echo "$var $va $nom";
+	echo "<br><br><br>";
   			?>
   			<div class="todo">
 		<section class="seccion">
 			<article>
-				<h1><center>Farmacia Jerusalen<center></h1>
-				<h3>Nombre:</h3>
-				<h3>Precio</h3>
-				<h3>Oferta</h3>
-				<h3>Farmacia</h3>
+				<h1><center><?php echo $nombre; ?><center></h1>
+				<h3><?php echo $nombre; ?></h3>
+				<h3><?php echo $d[2]; ?></h3>
+				<h3><?php echo $d[4]; ?></h3>
 				
 			</article>
 		</section>
 		<aside class="sec_foto">
 			<div class="widget">
 				<div class="imagen">
-					<img src="img/imagen5.jpg">
-					<h3>Latitud:</h3>
-					<h5>-45246523</h5>
-					<h3>Longitud:</h3>
-					<h5>-74630332</h5>
-					<h3>Zona:</h3>
-				<h5>7</h5>
+					<img src="img/indice.jpeg">
 				</div>
 
 			</div>
 		</aside>
 	</div>
   			<?php 
+}
+if (@$_GET["var"]=="Detalles1") {
+	$var=$_GET["id"];//id
+	//$va=$_GET["va"];//cedula
+	$nom=$_GET["tab"];//tabla
+	$query="select * from $nom where Id='$var'";
+	//echo "$query";
+    $ndf->consulta($query);
+    $d=$ndf->consulta_lista();
+    $nombre=$d[1];
+    $img=$d[2];
+	//echo "$var $va $nom";
+	echo "<br><br><br>";
+  			?>
+  			<div class="todo">
+		<section class="seccion">
+			<article>
+				<h1><center><?php echo $nombre; ?><center></h1>
+				<h3><?php echo $nombre; ?></h3>
+				<h3><?php echo $d[3]; ?></h3>
+				<h3><?php echo $d[4]; ?></h3>
+				<h3><?php echo $d[5]; ?></h3>
+				<h3><?php echo $d[6]; ?></h3>
+				<h3><?php echo $d[7]; ?></h3>
+				<h3><?php echo $d[10]; ?></h3>
+				
+			</article>
+		</section>
+		<aside class="sec_foto">
+			<div class="widget">
+				<div class="imagen">
+					<?php echo "<img src='../images/$img'>"; ?>
+					<h3><?php echo $d[8]; ?></h3>
+					<h3><?php echo $d[9]; ?></h3>
+					<h3><?php echo $d[11]; ?></h3>
+					<h3><?php echo $d[12]; ?></h3>
+					<h3><?php echo $d[13]; ?></h3>
+				</div>
 
+			</div>
+		</aside>
+	</div>
+  			<?php 
+}
+if (@$_GET["var"]=="detalle") {
+	$var=$_GET["var"];//evento
+	$va=$_GET["id"];//cedula
+	$nom=$_GET["tab"];//tabla
+	$query="select * from $nom where Cedula='$va'";
+	//echo "$query";
+    $ndf->consulta($query);
+    $d=$ndf->consulta_lista();
+    $nombre=$d[1];
+	//echo "$var $va $nom";
+	echo "<br><br><br>";
+  			?>
+  			<div class="todo">
+		<section class="seccion">
+			<article>
+				<h1><center><?php echo $nombre; ?><center></h1>
+				<h3><?php echo $nombre; ?></h3>
+				<h3><?php echo $d[2]; ?></h3>
+				<h3><?php echo $d[4]; ?></h3>
+				
+			</article>
+		</section>
+		<aside class="sec_foto">
+			<div class="widget">
+				<div class="imagen">
+					<img src="img/indice.jpeg">
+				</div>
 
-
-  		}
+			</div>
+		</aside>
+	</div>
+  			<?php 
 }
  ?>
 <!--Tabla-->

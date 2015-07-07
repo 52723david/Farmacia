@@ -74,7 +74,7 @@ class clase_mysql{
 		echo "<table id='card-table' class='table' align='center' whidth=100% aligen='center' border=1>";
 		echo "<tr>";
 		for ($i=0; $i < $this->numcampos() ; $i++) { 
-			if ($this->nombrecampo($i)!="Id" and $this->nombrecampo($i)!="Foto" and $this->nombrecampo($i)!="Farmacia") {
+			if ($this->nombrecampo($i)!=$f and $this->nombrecampo($i)!="Id" and $this->nombrecampo($i)!="Foto" and $this->nombrecampo($i)!="Farmacia" and $this->nombrecampo($i)!="Descripcion" and $this->nombrecampo($i)!="Horario" and $this->nombrecampo($i)!="Zona" and $this->nombrecampo($i)!="Provincia" and $this->nombrecampo($i)!="Canton" and $this->nombrecampo($i)!="Latitud" and $this->nombrecampo($i)!="Longitud" and $this->nombrecampo($i)!="Usuario" and $this->nombrecampo($i)!="Cedula" and $this->nombrecampo($i)!="Password") {
 				echo "<th>".$this->nombrecampo($i)."</th>";
 			}
 		}
@@ -83,7 +83,7 @@ class clase_mysql{
 		while (@$row=mysql_fetch_array($this->consulta_ID)) {
 			echo "<tr>";
 			for ($i=0; $i < $this->numcampos(); $i++) {
-				if ($this->nombrecampo($i)!=$f and $this->nombrecampo($i)!="Id" and $this->nombrecampo($i)!="Foto" and $this->nombrecampo($i)!="Farmacia") {
+				if ($this->nombrecampo($i)!=$f and $this->nombrecampo($i)!="Id" and $this->nombrecampo($i)!="Foto" and $this->nombrecampo($i)!="Farmacia" and $this->nombrecampo($i)!="Descripcion" and $this->nombrecampo($i)!="Horario" and $this->nombrecampo($i)!="Zona" and $this->nombrecampo($i)!="Provincia" and $this->nombrecampo($i)!="Canton" and $this->nombrecampo($i)!="Latitud" and $this->nombrecampo($i)!="Longitud" and $this->nombrecampo($i)!="Usuario" and $this->nombrecampo($i)!="Cedula" and $this->nombrecampo($i)!="Password") {
 				 	echo "<td>".$row[$i]."</td>";
 				 } 
 				if ($this->nombrecampo($i)==$f) {
@@ -97,7 +97,8 @@ class clase_mysql{
 			$nom=$row[1];
 			$idfar=@$row[9];
 			$idtur=@$row[3];
-			//echo "$r, "; 
+			$ce=@$row[13];
+			//echo "$ce, "; 
 			//echo "<td><a href='../view/menu/usuario.php?id=$row[0]&var=actualizar&va=$t&tab=$tabla'>Actualizar</a></td>";
 			//echo "<td><a href='../controller/admin1.php?id=$row[0]&va=borrar&var=$tabla&ht=$us'>Borrar</a></td>";
 			echo "<td>";
@@ -122,6 +123,7 @@ class clase_mysql{
 								//echo "$cer";
 								echo "<li><a href='admin.php?id=$row[0]&var=actualizar&var1=$cer&tab=$tabla&va=$r'>Actualizar</a>";
 								echo "<li><a href='../../controlador/admin2.php?id=$row[0]&va=borrarfarmacia&tab=$tabla&nomb=$nom&ht=$us&ce=$r'>Borrar</a>";
+								echo "<li><a href='admin.php?id=$row[0]&var=Detalles1&tab=$tabla&va=$r'>Detalles</a>";
 							}
 							if ($tabla=="productos" or $tabla=="turnos") {
 								echo "<li><a href='admin.php?id=$row[0]&var=actualizar&var1=$cer&tab=$tabla&va=$r'>Actualizar</a>";
@@ -130,6 +132,7 @@ class clase_mysql{
 							if ($tabla=="usuarios") {
 								echo "<li><a href='admin.php?id=$row[0]&var=actualizarusuario&var1=$cer&tab=$tabla&va=$r'>Actualizar</a>";
 								echo "<li><a href='../../controlador/admin2.php?id=$row[0]&va=borrarusuario&tab=$tabla&nomb=$nom&ht=$us&ce=$r'>Borrar</a>";
+								echo "<li><a href='admin.php?id=$row[0]&var=detalle&tab=$tabla&va=$r'>Detalles</a>";
 							}
 						}
 						?>
@@ -209,7 +212,7 @@ class clase_mysql{
 						<?php
 							echo "<li><a href='administrador.php?id=$ID&var=productos&va=$CE'>Productos</a>";
 							echo "<li><a href='administrador.php?id=$ID&var=turnos&va=$CE'>Turnos</a>";
-							echo "<li><a href='../Administrador/administrador.php?var=detalle&r=$ID&t=$tabla&va=$CE'>Detalles</a>";
+							echo "<li><a href='../Administrador/administrador.php?var=Detalles1&r=$ID&t=$tabla&va=$CE'>Detalles</a>";
 							echo "<li><a href='../Administrador/administrador.php?id=$row[0]&var=actualizarFarmacia&va=$user&tab=$tabla'>Actualizar</a>";
 							echo "<li><a href='../../controlador/admin1.php?id=$row[0]&va=$user&var=borrarfarmacia&tab=$tabla&nomb=$nom'>Borrar</a>";
 						?>
@@ -309,7 +312,7 @@ class clase_mysql{
 	    echo "</div>";
       }
 	}
-	function buscar($bus){
+	function buscar($bus, $c){
 	
 		
 			$sql = "SELECT * FROM farmacia WHERE Nombre LIKE '%" .$bus. "%' ORDER BY Nombre";
@@ -333,9 +336,31 @@ class clase_mysql{
               		$text = $fila['Nombre'];
               		$text1 = $fila['Direccion'];
               		$text2 = $fila['Sector'];
+              		$text3 = $fila['Foto'];
+              		$text4 = $fila['Sector'];
+              		//$text5 = $fila['Id'];
               		$sig_dolar= '\$';
-              		echo  $text."\$".$text1."---".$text2;
-
+              		//echo  $text."\$".$text1."---".$text2;
+              		echo "<br>";
+              		echo "<div class='todo'>";
+						echo "<section class='seccion'>";
+							echo "<article>";
+								echo "<h2><center>$text<center></h2>";
+								echo "<h4><$text</h4>";
+								echo "<h4>$text1</h4>";
+								echo "<h4>$text2</h4>";
+								echo "<h4>$text4</h4>";
+								//echo "<h4>$text5</h4>";
+							echo "</article>";
+						echo "</section>";
+						echo "<aside class='sec_foto'>";
+							echo "<div class='widget'>";
+								echo "<div class='imagen'>";
+									echo @"<img src='../images/$text3'>";
+								echo "</div>";
+							echo "</div>";
+						echo "</aside>";
+					echo "</div>";
               		//echo "$text &nbsp $ $text1 &nbsp $text2<br> <br>";
               	//	echo "<script>alert('$text $text1 ')</script>";
 			 		}
@@ -349,18 +374,43 @@ class clase_mysql{
               		$text1 = $fila['Precio'];
               		$text2 = $fila['Oferta'];
               		$text3 = $fila['Farmacia'];
+              		$text4 = $fila['Foto'];
+              		$text5 = $fila['Sector'];
+              		//$text6 = $fila['Id'];
               		$this->consulta("select * from farmacia where Id ='$text3'");
               		$v=$this->consulta_lista();
               		$ve=$v[1];
-              		echo "$text &nbsp; $text1 &nbsp; $text2 &nbsp; $ve <br><br>";
+              		echo "<br>";
+  					echo "<div class='todo'>";
+						echo "<section class='seccion'>";
+							echo "<article>";
+								echo "<h2><center>$text<center></h2>";
+								echo "<h4><$text</h4>";
+								echo "<h4>$text1</h4>";
+								echo "<h4>$text2</h4>";
+								echo "<h4>$ve</h4>";
+								echo "<h4>$text5</h4>";
+								//echo "<h4>$text6</h4>";
+							echo "</article>";
+						echo "</section>";
+						echo "<aside class='sec_foto'>";
+							echo "<div class='widget'>";
+								echo "<div class='imagen'>";
+									echo "<img src='../images/$text4'>";
+								echo "</div>";
+							echo "</div>";
+						echo "</aside>";
+					echo "</div>";
+					echo "<br>";
+              		//echo "$text &nbsp; $text1 &nbsp; $text2 &nbsp; $ve <br><br>";
               		//echo "<script>alert('$text $text1 $text2')</script>";
 					//echo "<script>location.href='../iu/admin.php'</script>";
 			 		}
 	     		}
-	     
+	     		echo "<br>";
 	  		}else{
 	  				echo "<script>alert('NO HAY RESULTADOS EN LA BBDD')</script>";
-					echo "<script>location.href='../vista/portal/index.php'</script>";
+					echo "<script>location.href='admin.php?va=$c'</script>";
 			   		//$text = "NO HAY RESULTADOS EN LA BBDD";	
 	  		}
 	  		//echo $text;
