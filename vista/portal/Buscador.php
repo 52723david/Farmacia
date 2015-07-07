@@ -97,7 +97,6 @@ if ($_GET["va"]=="buscar") {
   			$ndf->buscar($busqueda, "hghbjbjj");
   		}
 	}
-
 ?>
 
 
