@@ -3,7 +3,7 @@ jQuery(document).ready(function($) {
  
          
 // PARAMETROS OPCIONALES QUE NOS OFRECE EL PLUGIN
-width : 1000,
+width : 1098,
 height : 350,	
  
 // animation values

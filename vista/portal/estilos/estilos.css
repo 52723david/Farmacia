@@ -4,14 +4,11 @@
 }
 .contenedor{
 	width: 100%;
-	max-width: 1000px;
+	max-width: 1180px;
 	margin: 0 auto;
 	overflow: hidden;
 	background:#5D7FA6;
-	border-radius: 
-	-webkit-border-radius: 20px;
-	-moz-border-radius: 20px;
-	border-radius: 20px;
+	
 }
 /*Logo de la cabecera*/
 
@@ -25,7 +22,7 @@ header{
 	width: 30%;
 	height: auto;
 	float: left;
-	margin: -10 0;
+	margin: -10 41px;
 
 }
 .logo img{
@@ -34,8 +31,8 @@ header{
 }
 /*Buscador de la cabecera*/
 .buscador{
-	margin: auto;
-	margin-top: 20px;
+	margin: auto -36px;
+	margin-top: 40px;
 	float: right;
 		
 }
@@ -66,8 +63,8 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endC
 }
 /*Login de la cabecera*/
 .logo_login {
-	margin: auto;
-	margin-top: 20px;
+	margin: auto 41px;
+	margin-top: 40px;
 	float: right;
 }
 /*Slider*/
@@ -76,6 +73,7 @@ box-shadow: 0 .1em 1em black;
 -webkit-box-shadow: 0 .1em 1em black;
 -moz-box-shadow: 0 .1em 1em black;
 -o-box-shadow: 0 .1em 1em black;
+margin-left: 43px;
 }
 /* ESTILOS DEL SLIDESHOW */
  
@@ -117,15 +115,17 @@ nav{
 	width: 100%;
 	height: auto ;
 	background:#5D7FA6;
-	margin: 7px 0;
+	margin: 20px 39px;
+	margin-left: 420px;
 }
 
 
 /*Section para la fecha*/
 section {
 	margin: auto;
-  width: 31%;
-  padding: 0px;
+	margin-left: 40px;
+  width: 27%;
+  padding: 5px;
   float: left;
   background:#ffffff;
   box-sizing:border-box;
@@ -166,7 +166,9 @@ select {
 /*Aside para google maps*/
 aside{
 	margin: auto;
-	width: 69%;
+	margin-left: 12px;
+	width: 65.5%;
+	height: 68%;
 	box-sizing:border-box;
 	float: left;
 
@@ -185,6 +187,7 @@ footer{
 	clear:both;
 	float: left;
 	margin: auto;
+	margin-top: 20px;
 	box-sizing:border-box;
     width: 100%;
     padding: 5px;
@@ -216,13 +219,18 @@ footer h6{
 	height: auto;
 	}
 	section{
+		margin: auto;
 		width: 100%;
+		padding: 0px;
+
 	}
 	#datepicker{
 		float: left;
 	}
 	aside{
+		margin: auto;
 		width: 100%;
+		margin-left: 0px;
 	}
 	#googleMap{
 	position: relative;
@@ -231,6 +239,14 @@ footer h6{
 	width: 100% !important;
 	height:60% !important;
 	}
+	#slider{
+		margin-left: 0px;
+	}
+	nav{
+		margin: 7px 0;
+		margin-left: 0;
+	}
+
 }
 @media screen and (max-width: 510px){
 

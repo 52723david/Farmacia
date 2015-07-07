@@ -25,8 +25,8 @@
 		<script>
 			function success(position) {  
 				var puntero = new google.maps.MarkerImage(
-					'http://www.anestesiaclinicovalencia.org/wp-content/uploads/2013/11/informacion-paciente.png',
-					new google.maps.Size(100,100)
+					'http://www.experimentosgraficos.com/~cesfam/img/icono_saludmental.png',
+					new google.maps.Size(50,50)
 				);
 				var mapita = document.createElement('div');  
 				mapita.id = 'mapita';  
@@ -100,12 +100,8 @@
 		            <ul>
 		                <li><a href='#home'>Inicio</a></li>
 		                <li><a href='#about-me'>Ubicación</a></li>
-		                <li><a href='#gallery'>Contacto</a></li>
 		                <li><a href='#blog'>Farmacias</a></li>
-		                <li><a href='#home'>Inicio</a></li>
-		                <li><a href='#about-me'>Ubicación</a></li>
-		                <li><a href='#gallery'>Contacto</a></li>
-		                <li><a href='#blog'>Farmacias</a></li>
+		               
 		            </ul>
 		        </div>
 			</nav>
