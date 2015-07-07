@@ -32,7 +32,7 @@ if ($user=="") {
 			$query="select * from usuarios where Cedula='$c'";
     		$ndf->consulta($query);
     		$d2=$ndf->consulta_lista();
-			echo "<div class='logo'><a href='administrador.php?var=ver&va=$c'>Bienbenido $d2[1] $d2[2]</a></div>";
+			echo "<div class='logo'><a href='administrador.php?var=ver&va=$c'>Bienvenido $d2[1] $d2[2]</a></div>";
 		 ?>
 		<div class="logo1"><a href="../../controlador/admin1.php?va=salir">Salir</a></div>
 	</div>
@@ -217,7 +217,7 @@ if ($_GET["var"]=="actualizarFarmacia")	{
 		$query="select * from $nomTabla where Cedula='$idr'";
 	}
 	$ndf->consulta($query);
-	$ndf->actualizar($nomTabla, "kcnfnjew");
+	$ndf->actualizar($nomTabla, "kcnfnjew", "bbcdbsdbj");
 }
 if ($_GET["var"]=="detalle") {
 	//echo $_GET["r"], $_GET["t"];
@@ -250,7 +250,7 @@ if (@$_GET["var"]=="actualizar") {
     	//echo "$query";
     }
     $ndf->consulta($query);
-    $ndf->actualizar($nomTabla, $c);
+    $ndf->actualizar($nomTabla, $c, "bjsdj<ajdj");
 }
 if ($_GET["var"]=="productos" or $_GET["var"]=="turnos") {
 	$idd=$_GET["id"];
@@ -301,7 +301,7 @@ if (@$_GET["var"]=="ingresar") {
 		    if ($ndf->nombrecampo($i)=="Id") {
 		        echo "<input type='hidden' name='".$ndf->nombrecampo($i)."'>";
 		    }
-		    if ($ndf->nombrecampo($i)!="Id" and $ndf->nombrecampo($i)!="Usuario" and $ndf->nombrecampo($i)!="Foto" and $ndf->nombrecampo($i)!="Farmacia") {
+		    if ($ndf->nombrecampo($i)!="Id" and $ndf->nombrecampo($i)!="Usuario" and $ndf->nombrecampo($i)!="Foto" and $ndf->nombrecampo($i)!="Farmacia" and $ndf->nombrecampo($i)!="fecha_inicio" and $ndf->nombrecampo($i)!="fecha_fin") {
 		        echo "<input type='text' name='".$ndf->nombrecampo($i)."'placeholder='".$ndf->nombrecampo($i)."'>";
 		    }
 		    if ($ndf->nombrecampo($i)=="Usuario") {
@@ -312,6 +312,9 @@ if (@$_GET["var"]=="ingresar") {
 		    }
 		    if ($ndf->nombrecampo($i)=="Farmacia") {
 		        echo "<input type='hidden' name='".$ndf->nombrecampo($i)."' value='$farma'>";
+		    }
+		    if ($ndf->nombrecampo($i)=="fecha_inicio" or $ndf->nombrecampo($i)=="fecha_fin") {
+		        echo "<input type='date' name='".$ndf->nombrecampo($i)."'>";
 		    }
 	    }
 	echo "<input type='submit' id='boton' name='btn_enviar' value='Enviar'>";

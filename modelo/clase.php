@@ -67,7 +67,7 @@ class clase_mysql{
 	}
 	//devuelve el nombre de un campo de la consulta
 	function nombrecampo($numcampo){
-		return mysql_field_name($this->consulta_ID, $numcampo);
+		return @mysql_field_name($this->consulta_ID, $numcampo);
 	}
 	//muestra los resultados de la consulta
 	function verconsulta($r, $f, $t){
@@ -97,7 +97,7 @@ class clase_mysql{
 			$nom=$row[1];
 			$idfar=@$row[9];
 			$idtur=@$row[3];
-			//echo "$cer"; 
+			//echo "$r, "; 
 			//echo "<td><a href='../view/menu/usuario.php?id=$row[0]&var=actualizar&va=$t&tab=$tabla'>Actualizar</a></td>";
 			//echo "<td><a href='../controller/admin1.php?id=$row[0]&va=borrar&var=$tabla&ht=$us'>Borrar</a></td>";
 			echo "<td>";
@@ -107,6 +107,7 @@ class clase_mysql{
 					<li><a href="">Opciones</a>
 						<ul>
 						<?php
+						if ($f!="admin") {
 						if ($tabla!="productos" and $tabla!="turnos" and $f!="admin") {
 							echo "<li><a href='administrador.php?id=$row[0]&var=actualizar&va=$cer&tab=$tabla'>Actualizar</a>";
 							echo "<li><a href='../../controlador/admin1.php?id=$row[0]&va=$cer&var=borrarfarmacia&tab=$tabla&nomb=$nom'>Borrar</a>";
@@ -115,9 +116,21 @@ class clase_mysql{
 							echo "<li><a href='../../controlador/admin1.php?id=$row[0]&var=actualizartabla&va=$cer&tab=$tabla&ifr=$idfar&itr=$idtur'>Actualizar</a>";
 							echo "<li><a href='../../controlador/admin1.php?id=$row[0]&va=$cer&var=borrar&tab=$tabla&nomb=$nom&ht=$us'>Borrar</a>";
 						}
+						}
 						if ($f=="admin") {
-							echo "<li><a href='admin.php?id=$row[0]&var=actualizar&va=$cer&tab=$tabla'>Actualizar</a>";
-							echo "<li><a href='../../controlador/admin1.php?id=$row[0]&va=$cer&var=borrar&tab=$tabla&nomb=$nom&ht=$us'>Borrar</a>";
+							if ($tabla!="productos" and $tabla!="turnos" and $tabla!="usuarios") {
+								//echo "$cer";
+								echo "<li><a href='admin.php?id=$row[0]&var=actualizar&var1=$cer&tab=$tabla&va=$r'>Actualizar</a>";
+								echo "<li><a href='../../controlador/admin2.php?id=$row[0]&va=borrarfarmacia&tab=$tabla&nomb=$nom&ht=$us&ce=$r'>Borrar</a>";
+							}
+							if ($tabla=="productos" or $tabla=="turnos") {
+								echo "<li><a href='admin.php?id=$row[0]&var=actualizar&var1=$cer&tab=$tabla&va=$r'>Actualizar</a>";
+								echo "<li><a href='../../controlador/admin2.php?id=$row[0]&va=borrar&tab=$tabla&nomb=$nom&ht=$us&ce=$r'>Borrar</a>";
+							}
+							if ($tabla=="usuarios") {
+								echo "<li><a href='admin.php?id=$row[0]&var=actualizarusuario&var1=$cer&tab=$tabla&va=$r'>Actualizar</a>";
+								echo "<li><a href='../../controlador/admin2.php?id=$row[0]&va=borrarusuario&tab=$tabla&nomb=$nom&ht=$us&ce=$r'>Borrar</a>";
+							}
 						}
 						?>
 						</ul>
@@ -244,7 +257,7 @@ class clase_mysql{
       	$c=@$row[13];
       	$cc=@$row[9];
       	$ccc=@$row[3];
-      	//echo "$tipo";
+      	//echo "$c";
       	echo "<div class='wrapper'>";
 		echo "<div id='main' style='padding:50px 0 0 0;'>";
 		if ($tipo=="admin") {
@@ -261,6 +274,32 @@ class clase_mysql{
             echo "<input type='file' name='".$this->nombrecampo($i)."'>";
           }
           if ($this->nombrecampo($i)!="Id" and $this->nombrecampo($i)!="Usuario" and $this->nombrecampo($i)!="Farmacia" and $this->nombrecampo($i)!="Foto" and $this->nombrecampo($i)!="Password") {
+            echo "<input type='text' name='".$this->nombrecampo($i)."'value='".$row[$i]."'>";
+          }
+        }
+        echo "<input type='submit' id='boton' name='btn_enviar' value='Enviar'>";
+        echo "</form>";
+        echo "</div>";
+	    echo "</div>";
+      }
+	}
+	function actualizarusuario($sd, $ce, $tipo){
+      while ($row=mysql_fetch_array($this->consulta_ID)) {
+      	$c=@$row[13];
+      	$cc=@$row[9];
+      	$ccc=@$row[3];
+      	//echo "$c";
+      	echo "<div class='wrapper'>";
+		echo "<div id='main' style='padding:50px 0 0 0;'>";
+		echo @"<form id='contact-form' action='../../controlador/admin2.php?va=actualizarusuario&nom=$sd&io=$c&ad=$row[0]&ced=$ce&ge=$cc&gege=$ccc' method='post'>";
+        for ($i=0; $i < $this->numcampos(); $i++) { 
+          if ($this->nombrecampo($i)=="Id") {
+            echo "<input type='hidden' name='".$this->nombrecampo($i)."'value='".$row[$i]."'>";
+          }
+          if ($this->nombrecampo($i)=="Foto") {
+            echo "<input type='file' name='".$this->nombrecampo($i)."'>";
+          }
+          if ($this->nombrecampo($i)!="Id" and $this->nombrecampo($i)!="Foto") {
             echo "<input type='text' name='".$this->nombrecampo($i)."'value='".$row[$i]."'>";
           }
         }

@@ -49,7 +49,7 @@
 		session_start();
 		session_unset();
 		session_destroy();
-		header("location: ../vista/Login/login.php");
+		header("location: ../index.php");
 	}
 	//Ingresa uan fila en cuelquier tabla de la base
 	if (@$_GET["va"]=="ingresar") {
