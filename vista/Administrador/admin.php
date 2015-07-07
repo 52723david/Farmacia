@@ -88,9 +88,6 @@ if (@$_GET["var"]=="administrador") {
 }
 
 if (@$_GET["var"]=="administradortodo") {
-
-
-
 	$nomm=$_GET["nom"];
 	echo "<div class='boton1'>";
     $query="select * from $nomm";

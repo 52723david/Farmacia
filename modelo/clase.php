@@ -283,7 +283,6 @@ class clase_mysql{
 	    echo "</div>";
       }
 	}
-<<<<<<< HEAD
 	function actualizarusuario($sd, $ce, $tipo){
       while ($row=mysql_fetch_array($this->consulta_ID)) {
       	$c=@$row[13];
@@ -310,7 +309,6 @@ class clase_mysql{
 	    echo "</div>";
       }
 	}
-=======
 	function buscar($bus){
 	
 		
@@ -367,8 +365,7 @@ class clase_mysql{
 	  		}
 	  		//echo $text;
 		}
->>>>>>> e80dd7a84484f9dbd193aca9cdd56b16a553d83e
-} 
+	} 
 ?>
 </body>
 </html>
