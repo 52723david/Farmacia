@@ -16,7 +16,7 @@
 	if (@$_GET["va"]=="loguin" and $_POST['tipo']=="admin") {
 		$usuario1 = $_POST['usuario'];
 		$clave1 = $_POST['clave'];
-		$query="select * from administrador where Usuario=MD5('$usuario1') and Password=MD5('$clave1')";
+		$query="select * from administrador where Usuario='$usuario1' and Password='$clave1'";
 		$ndf->consulta($query);
 		$ndf->validar($_POST['tipo']);
 	}

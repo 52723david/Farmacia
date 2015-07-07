@@ -294,7 +294,10 @@ class clase_mysql{
               		$text = $fila['Nombre'];
               		$text1 = $fila['Direccion'];
               		$text2 = $fila['Sector'];
-              		echo "$text &nbsp; $text1 &nbsp; $text2<br> <br>";
+              		$sig_dolar= '\$';
+              		echo  $text."\$".$text1."---".$text2;
+
+              		//echo "$text &nbsp $ $text1 &nbsp $text2<br> <br>";
               	//	echo "<script>alert('$text $text1 ')</script>";
 			 		}
 	     		}
@@ -306,7 +309,11 @@ class clase_mysql{
               		$text = $fila['Nombre'];
               		$text1 = $fila['Precio'];
               		$text2 = $fila['Oferta'];
-              		echo "$text &nbsp; $text1 &nbsp; $text2 <br><br>";
+              		$text3 = $fila['Farmacia'];
+              		$this->consulta("select * from farmacia where Id ='$text3'");
+              		$v=$this->consulta_lista();
+              		$ve=$v[1];
+              		echo "$text &nbsp; $text1 &nbsp; $text2 &nbsp; $ve <br><br>";
               		//echo "<script>alert('$text $text1 $text2')</script>";
 					//echo "<script>location.href='../iu/admin.php'</script>";
 			 		}
