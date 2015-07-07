@@ -172,14 +172,14 @@ border-bottom-right-radius: 6px;
 	padding:8px 30px 8px 30px;
 	margin:0px -3px 0px -3px;
 	font-size:15px;
-	text-shadow:1px 1px 1px #3e587b;
-	background-color:#537b9f;
-	border-left:1px solid #3e587b;
+	text-shadow:1px 1px 1px #75BEB9;
+	background-color:#75BEB9;
+	border-left:1px solid #75BEB9;
 	background-image:url('../rmm-img/sapphire-menu-bg.png');
 	background-repeat:repeat-x;
 }
 .rmm.sapphire .rmm-main-list li a:hover {
-	background:#3e597b;
+	background:#75BEB9;
 }
 .rmm.sapphire .rmm-main-list li:first-child a {
 -webkit-border-top-left-radius: 5px;
