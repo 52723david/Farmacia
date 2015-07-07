@@ -27,6 +27,9 @@ if ($user=="") {
 </head>
 
 <body>
+
+
+
 	<div class="header">
 		<?php 
 			$query="select * from administrador where Cedula='$c'";
@@ -63,6 +66,15 @@ if ($user=="") {
 							<a href="../../controlador/admin1.php?va=salir">Salir</a>
 						</li>
 					</ul>
+					
+					<fieldset class="searchform">
+				<form id="buscador" name="buscador" method="post" action="../../controlador/admin1.php?va=buscar">
+					<input type="text" name="busca"placeholder="Buscar..." class="searchfield"> 
+					<input type="submit" value="Ir" class="searchbutton">
+   			 	</form>
+
+			</fieldset>
+				
 		<!--Fin menu-->
 		<!--Tabla-->
 <?php 
@@ -74,7 +86,11 @@ if (@$_GET["var"]=="administrador") {
     $ndf->consulta($query);
     $ndf->verconsulta("hucdshuh", "admin", "$idr");
 }
+
 if (@$_GET["var"]=="administradortodo") {
+
+
+
 	$nomm=$_GET["nom"];
 	echo "<div class='boton1'>";
     $query="select * from $nomm";

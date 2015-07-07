@@ -283,6 +283,7 @@ class clase_mysql{
 	    echo "</div>";
       }
 	}
+<<<<<<< HEAD
 	function actualizarusuario($sd, $ce, $tipo){
       while ($row=mysql_fetch_array($this->consulta_ID)) {
       	$c=@$row[13];
@@ -309,6 +310,64 @@ class clase_mysql{
 	    echo "</div>";
       }
 	}
+=======
+	function buscar($bus){
+	
+		
+			$sql = "SELECT * FROM farmacia WHERE Nombre LIKE '%" .$bus. "%' ORDER BY Nombre";
+			$sql1 = "SELECT * FROM productos WHERE Nombre LIKE '%" .$bus. "%' ORDER BY Nombre";
+
+//$sql1 = "SELECT * FROM categoria WHERE Titulo LIKE '%" .$bus. "%' ORDER BY Titulo";
+			//$sql1="select * from productos where Nombre=$bus";
+			$frt=$this->consulta($sql);
+			$frt1=$this->consulta($sql1);
+	  		//$resultado = mysql_query($sql); //Ejecución de la consulta
+      		//Si hay resultados...
+	  		if (mysql_num_rows($frt) > 0 or mysql_num_rows($frt1) > 0 ){ 
+	     		// Se recoge el número de resultados
+				 //$registros = '<p>HEMOS ENCONTRADO ' . mysql_num_rows($frt) . ' registros </p>';
+	     		// Se almacenan las cadenas de resultado
+	     		if (mysql_num_rows($frt) > 0) {
+	     			while($fila = mysql_fetch_assoc($frt)){ 
+		 			//echo $sq;
+		 			//$ndf->consulta($sql1);
+		 			//$ndf->verconsulta();
+              		$text = $fila['Nombre'];
+              		$text1 = $fila['Direccion'];
+              		$text2 = $fila['Sector'];
+              		$sig_dolar= '\$';
+              		echo  $text."\$".$text1."---".$text2;
+
+              		//echo "$text &nbsp $ $text1 &nbsp $text2<br> <br>";
+              	//	echo "<script>alert('$text $text1 ')</script>";
+			 		}
+	     		}
+	     		if (mysql_num_rows($frt1) > 0) {
+	     			while($fila = mysql_fetch_assoc($frt1)){ 
+		 			//echo $sq;
+		 			//$ndf->consulta($sql1);
+		 			//$ndf->verconsulta();
+              		$text = $fila['Nombre'];
+              		$text1 = $fila['Precio'];
+              		$text2 = $fila['Oferta'];
+              		$text3 = $fila['Farmacia'];
+              		$this->consulta("select * from farmacia where Id ='$text3'");
+              		$v=$this->consulta_lista();
+              		$ve=$v[1];
+              		echo "$text &nbsp; $text1 &nbsp; $text2 &nbsp; $ve <br><br>";
+              		//echo "<script>alert('$text $text1 $text2')</script>";
+					//echo "<script>location.href='../iu/admin.php'</script>";
+			 		}
+	     		}
+	     
+	  		}else{
+	  				echo "<script>alert('NO HAY RESULTADOS EN LA BBDD')</script>";
+					echo "<script>location.href='../vista/portal/index.php'</script>";
+			   		//$text = "NO HAY RESULTADOS EN LA BBDD";	
+	  		}
+	  		//echo $text;
+		}
+>>>>>>> e80dd7a84484f9dbd193aca9cdd56b16a553d83e
 } 
 ?>
 </body>

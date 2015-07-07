@@ -16,7 +16,7 @@
 	if (@$_GET["va"]=="loguin" and $_POST['tipo']=="admin") {
 		$usuario1 = $_POST['usuario'];
 		$clave1 = $_POST['clave'];
-		$query="select * from administrador where Usuario=MD5('$usuario1') and Password=MD5('$clave1')";
+		$query="select * from administrador where Usuario='$usuario1' and Password='$clave1'";
 		$ndf->consulta($query);
 		$ndf->validar($_POST['tipo']);
 	}
@@ -225,4 +225,19 @@
 		$ndf->consulta($query);
 		header("location: ../vista/Login/login.php");
 	}
+	if ($_GET["va"]=="buscar") {
+		$ve=$_POST["busca"];
+		//echo $ve."<br>";
+		$busqueda = trim($ve);
+		//echo $busqueda;
+		if (empty($busqueda)){
+	  		//$texto = 'Búsqueda sin resultados';
+	  		echo "<script>alert('Ingrese palabra a buscar')</script>";
+			echo "<script>location.href='../vista/portal/index.php'</script>";
+	  		//echo $texto;
+  		}else{
+  			$ndf->buscar($busqueda);
+  		}
+	}
+
  ?>
