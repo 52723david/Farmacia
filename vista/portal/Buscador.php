@@ -1,4 +1,10 @@
 <html>
+<?php 
+	include("../../modelo/confi.php"); 
+	include("../../modelo/clase.php");
+	$ndf=new clase_mysql;
+	$ndf->conectar($db_name, $db_host, $db_user, $db_pasword);
+?>
 	<head>
 		<html lang="es">
 		<title>Tu Farmacia Cerca</title>
@@ -18,19 +24,15 @@
 		<script src="js/jquery-ui.js"></script>
 		<script>
 			$(function () {
-				$.datepicker.setDefaults($.datepicker.regional["es"]);
-					$("#datepicker").datepicker({
-					minDate: "07/07/2015",
-					maxDate: "31/12/2015"
-				});
+			$("#datepicker").datepicker();
 			});
 		</script>
 		<script src="http://maps.googleapis.com/maps/api/js"></script>
 		<script>
 			function success(position) {  
 				var puntero = new google.maps.MarkerImage(
-					'http://www.experimentosgraficos.com/~cesfam/img/icono_saludmental.png',
-					new google.maps.Size(50,50)
+					'http://www.anestesiaclinicovalencia.org/wp-content/uploads/2013/11/informacion-paciente.png',
+					new google.maps.Size(100,100)
 				);
 				var mapita = document.createElement('div');  
 				mapita.id = 'mapita';  
@@ -53,7 +55,7 @@
 					icon: puntero
 				});
 			}
-			// Lllamo php para uvicar las farmasias en el mapa
+			// Utilzo el radio medio de la tierra que es de 6.371 km, poruqe se lo va a trabajar en quilometros y no en millas
 
 			function error(msg) {  
 				var status = document.getElementById('status');  
@@ -76,64 +78,30 @@
 				<div class="logo_login">
 					<a href="../Login/login.php"><img src="images/login.png" width="100" heigth="100"></a>
 				</div>
-				<div class="buscador">
-					<fieldset class="searchform">
-				<form id="buscador" name="buscador" method="post" action="Buscador.php?va=buscar">
-					<input type="text" name="busca"placeholder="Buscar..." class="searchfield"> 
-					<input type="submit" value="Ir" class="searchbutton">
-   			 	</form>
-
-			</fieldset>
-				</div>		
+		
 			</header>
-			<div id="slider">
-		        <ul class="bjqs">
-		            <li>
-		                <img src="images/farmacia1.jpg" alt=""/>
-		            </li>
-		            <li>
-		                <img src="images/farmacia2.jpg" alt=""/>
-		            </li>
-		            <li>
-		                <img src="images/farmacia3.jpg" alt=""/>
-		            </li>
-		        </ul>
-		    </div>
-			<nav class="menu">
-				<div class="rmm"  data-menu-style = "sapphire">
-		            <ul>
-		                <li><a href='#home'>Inicio</a></li>
-		                <li><a href='#about-me'>Ubicación</a></li>
-		                <li><a href='#blog'>Farmacias</a></li>
-		               
-		            </ul>
-		        </div>
-			</nav>
-			<section>
-				<div class="titulo">
-					<h1>FARMACIAS DE TURNO</h1>
-				</div>
-					<div id="datepicker"></div>		
-				<br>
-				<div class="select">
-					<select class="mySelect" size="8">
-					  <option>Farmacia Cruz Azul</option>
-					  <option>Farmacia Pichincha</option>
-					  <option>Farmacia Bolivar</option>
-					  <option>Farmacia Auxiliadora</option>
-					  <option>Farmacia Mayorista</option>
-					  <option>Farmacia Sana Sana</option>
-					  <option>Farmacia Cruz Farmacia</option>
-					  <option>Farmacia Santa Elena</option>
-					  <option>Farmacia Bolivar</option>
-					  <option>Farmacia Auxiliadora</option>
-					  <option>Farmacia Mayorista</option>
-					  <option>Farmacia Sana Sana</option>
-					  <option>Farmacia Cruz Farmacia</option>
-					  <option>Farmacia Santa Elena</option>
-					</select>
-				</div>
-			</section>
+			<!--  Imagenes carrusel-->
+			
+<?php 
+if ($_GET["va"]=="buscar") {
+		$ve=$_POST["busca"];
+		//echo $ve."<br>";
+		$busqueda = trim($ve);
+		//echo $busqueda;
+		if (empty($busqueda)){
+	  		//$texto = 'Búsqueda sin resultados';
+	  		echo "<script>alert('Ingrese palabra a buscar')</script>";
+			echo "<script>location.href='Buscador.php'</script>";
+	  		//echo $texto;
+  		}else{
+  			$ndf->buscar($busqueda, "hghbjbjj");
+  		}
+	}
+
+?>
+
+
+
 			<aside>			  
 				<p id="demo"></p>
 				<div id="map"></div>		

@@ -315,8 +315,8 @@ class clase_mysql{
 	function buscar($bus, $c){
 	
 		
-			$sql = "SELECT * FROM farmacia WHERE Nombre LIKE '%" .$bus. "%' ORDER BY Nombre";
-			$sql1 = "SELECT * FROM productos WHERE Nombre LIKE '%" .$bus. "%' ORDER BY Nombre";
+			@$sql = "SELECT * FROM farmacia WHERE Nombre LIKE '%" .$bus. "%' ORDER BY Nombre";
+			@$sql1 = "SELECT * FROM productos WHERE Nombre LIKE '%" .$bus. "%' ORDER BY Nombre";
 
 //$sql1 = "SELECT * FROM categoria WHERE Titulo LIKE '%" .$bus. "%' ORDER BY Titulo";
 			//$sql1="select * from productos where Nombre=$bus";
