@@ -18,7 +18,11 @@
 		<script src="js/jquery-ui.js"></script>
 		<script>
 			$(function () {
-			$("#datepicker").datepicker();
+				$.datepicker.setDefaults($.datepicker.regional["es"]);
+					$("#datepicker").datepicker({
+					minDate: "07/07/2015",
+					maxDate: "31/12/2015"
+				});
 			});
 		</script>
 		<script src="http://maps.googleapis.com/maps/api/js"></script>
@@ -49,7 +53,7 @@
 					icon: puntero
 				});
 			}
-			// Utilzo el radio medio de la tierra que es de 6.371 km, poruqe se lo va a trabajar en quilometros y no en millas
+			// Lllamo php para uvicar las farmasias en el mapa
 
 			function error(msg) {  
 				var status = document.getElementById('status');  
