@@ -18,12 +18,18 @@ if ($user=="") {
 
 	<link rel="stylesheet" type="text/css" href="estilos/estilos.css">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<script type="text/javascript" src="js/jquery.js"></script>
+	
 	<meta name="viewport" content="width=device-width">
 	<link href="estilos/stacktable.css" rel="stylesheet" />
 	<link href="estilos/style.css" rel="stylesheet" />
-
-
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+<script>
+	$(function () {
+	$("#fecha").datepicker();
+	});
+</script>
 </head>
 
 <body>
@@ -36,25 +42,17 @@ if ($user=="") {
 		 ?>
 		<div class="logo1"><a href="../../controlador/admin1.php?va=salir">Salir</a></div>
 	</div>
-	<div class="container">
-		<div class="content">
-			
-				<!--Menu de navegacion-->
-				<a class="toggleMenu" href="#">Menu</a>
-							<ul class="nav">
-						<li  class="test">
-							<?php echo "<a href='administrador.php?var=ver&va=$c'>Inicio</a>"; ?>
-						</li>
-						<li>
-							<?php echo "<a href='administrador.php?var=Detalles&va=$c&nom=usuarios'>Detalles de $d2[1]</a>"; ?>
-						</li>
-						<li>
-							<?php echo "<a href='administrador.php?var=ingresarFarmacia&va=$c'>Crear Farmacia</a>"; ?>
-						</li>
-						<li>
-							<a href="../../controlador/admin1.php?va=salir">Salir</a>
-						</li>
-					</ul>
+<div class="container">
+<div class="content">
+	<!--Menu de navegacion-->
+	<a class="toggleMenu" href="#">Menu</a>
+	<ul class="nav">
+		<li  class="test"><?php echo "<a href='administrador.php?var=ver&va=$c'>Inicio</a>"; ?></li>
+		<li><?php echo "<a href='administrador.php?var=Detalles&va=$c&nom=usuarios'>Detalles de $d2[1]</a>"; ?></li>
+		<li><?php echo "<a href='administrador.php?var=ingresarFarmacia&va=$c'>Crear Farmacia</a>"; ?></li>
+		<li><a href="../../controlador/admin1.php?va=salir">Salir</a></li>
+	</ul>
+</script>
 <?php 
 if ($_GET["var"]=="ver") {
 	$query="select * from farmacia where Usuario='$c'";
@@ -72,13 +70,13 @@ if ($_GET["var"]=="ver") {
 		        echo "<input type='hidden' name='".$ndf->nombrecampo($i)."'>";
 		    }
 		    if ($ndf->nombrecampo($i)!="Id" and $ndf->nombrecampo($i)!="Usuario" and $ndf->nombrecampo($i)!="Foto") {
-		        echo "<input type='text' name='".$ndf->nombrecampo($i)."'placeholder='".$ndf->nombrecampo($i)."'>";
+		        echo "<label>".$ndf->nombrecampo($i)."<input type='text' name='".$ndf->nombrecampo($i)."'placeholder='".$ndf->nombrecampo($i)."'></label>";
 		    }
 		    if ($ndf->nombrecampo($i)=="Usuario") {
 		        echo "<input type='hidden' name='".$ndf->nombrecampo($i)."' value='$c'>";
 		    }
 		    if ($ndf->nombrecampo($i)=="Foto") {
-		        echo "<input type='file' name='".$ndf->nombrecampo($i)."'>";
+		        echo "<label>".$ndf->nombrecampo($i)."<input type='file' name='".$ndf->nombrecampo($i)."'></label>";
 		    }
 	    }
 	    echo "<input type='submit' id='boton' name='btn_enviar' value='Enviar'>";
@@ -98,13 +96,13 @@ if ($_GET["var"]=="ingresarFarmacia") {
 		        echo "<input type='hidden' name='".$ndf->nombrecampo($i)."'>";
 		    }
 		    if ($ndf->nombrecampo($i)!="Id" and $ndf->nombrecampo($i)!="Usuario" and $ndf->nombrecampo($i)!="Foto") {
-		        echo "<input type='text' name='".$ndf->nombrecampo($i)."'placeholder='".$ndf->nombrecampo($i)."'>";
+		        echo "<label>".$ndf->nombrecampo($i)."<input type='text' name='".$ndf->nombrecampo($i)."'placeholder='".$ndf->nombrecampo($i)."'></label>";
 		    }
 		    if ($ndf->nombrecampo($i)=="Usuario") {
 		        echo "<input type='hidden' name='".$ndf->nombrecampo($i)."' value='$c'>";
 		    }
 		    if ($ndf->nombrecampo($i)=="Foto") {
-		        echo "<input type='file' name='".$ndf->nombrecampo($i)."'>";
+		        echo "<label>".$ndf->nombrecampo($i)."<input type='file' name='".$ndf->nombrecampo($i)."'></label>";
 		    }
 	    }
 	    echo "<input type='submit' id='boton' name='btn_enviar' value='Enviar'>";
@@ -207,19 +205,21 @@ if (@$_GET["var"]=="ingresar") {
 		        echo "<input type='hidden' name='".$ndf->nombrecampo($i)."'>";
 		    }
 		    if ($ndf->nombrecampo($i)!="Id" and $ndf->nombrecampo($i)!="Usuario" and $ndf->nombrecampo($i)!="Foto" and $ndf->nombrecampo($i)!="Farmacia" and $ndf->nombrecampo($i)!="fecha_inicio" and $ndf->nombrecampo($i)!="fecha_fin") {
-		        echo "<input type='text' name='".$ndf->nombrecampo($i)."'placeholder='".$ndf->nombrecampo($i)."'>";
+		        echo "<label>".$ndf->nombrecampo($i)."<input type='text' name='".$ndf->nombrecampo($i)."'placeholder='".$ndf->nombrecampo($i)."'></label>";
 		    }
 		    if ($ndf->nombrecampo($i)=="Usuario") {
 		        echo "<input type='hidden' name='".$ndf->nombrecampo($i)."' value='$c'>";
 		    }
 		    if ($ndf->nombrecampo($i)=="Foto") {
-		        echo "<input type='file' name='".$ndf->nombrecampo($i)."'>";
+		        echo "<label>".$ndf->nombrecampo($i)."<input type='file' name='".$ndf->nombrecampo($i)."'></label>";
 		    }
 		    if ($ndf->nombrecampo($i)=="Farmacia") {
 		        echo "<input type='hidden' name='".$ndf->nombrecampo($i)."' value='$farma'>";
 		    }
 		    if ($ndf->nombrecampo($i)=="fecha_inicio" or $ndf->nombrecampo($i)=="fecha_fin") {
-		        echo "<input type='date' name='".$ndf->nombrecampo($i)."'>";
+		    	?>
+		        <label for="fecha"><?php echo $ndf->nombrecampo($i); ?>:<input type='text' name='<?php echo $ndf->nombrecampo($i); ?>' placeholder='<?php echo $ndf->nombrecampo($i); ?>' id="fecha" value="" /></label>
+		    	<?php
 		    }
 	    }
 	echo "<input type='submit' id='boton' name='btn_enviar' value='Enviar'>";
