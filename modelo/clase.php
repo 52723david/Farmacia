@@ -274,7 +274,7 @@ class clase_mysql{
             echo "<input type='hidden' name='".$this->nombrecampo($i)."'value='".$row[$i]."'>";
           }
           if ($this->nombrecampo($i)=="Foto") {
-            echo "<label>".$this->nombrecampo($i) ."<input type='file' name='".$this->nombrecampo($i)."'></label>";
+            echo "<label>".$this->nombrecampo($i) ."<input type='file' name='".$this->nombrecampo($i)."'></label><br>";
           }
           if ($this->nombrecampo($i)!="Id" and $this->nombrecampo($i)!="Usuario" and $this->nombrecampo($i)!="Farmacia" and $this->nombrecampo($i)!="Foto" and $this->nombrecampo($i)!="Password") {
             echo "<label>".$this->nombrecampo($i) ."<input type='text' name='".$this->nombrecampo($i)."'value='".$row[$i]."'></label>";
@@ -300,10 +300,10 @@ class clase_mysql{
             echo "<input type='hidden' name='".$this->nombrecampo($i)."'value='".$row[$i]."'>";
           }
           if ($this->nombrecampo($i)=="Foto") {
-            echo "<label>".$ndf->nombrecampo($i)."<input type='file' name='".$this->nombrecampo($i)."'></label>";
+            echo "<label>".$this->nombrecampo($i)."<input type='file' name='".$this->nombrecampo($i)."'></label><br>";
           }
           if ($this->nombrecampo($i)!="Id" and $this->nombrecampo($i)!="Foto") {
-            echo "<label>".$ndf->nombrecampo($i)."<input type='text' name='".$this->nombrecampo($i)."'value='".$row[$i]."'></label>";
+            echo "<label>".$this->nombrecampo($i)."<input type='text' name='".$this->nombrecampo($i)."'value='".$row[$i]."'></label>";
           }
         }
         echo "<input type='submit' id='boton' name='btn_enviar' value='Enviar'>";

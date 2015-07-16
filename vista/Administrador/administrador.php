@@ -25,11 +25,6 @@ if ($user=="") {
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-<script>
-	$(function () {
-	$("#fecha").datepicker();
-	});
-</script>
 </head>
 
 <body>
@@ -53,8 +48,14 @@ if ($user=="") {
 		<li><a href="../../controlador/admin1.php?va=salir">Salir</a></li>
 	</ul>
 </script>
+<script>
+$(function () {
+$("#fecha").datepicker();
+});
+</script>
 <?php 
 if ($_GET["var"]=="ver") {
+	header('Content-Type: text/html; charset=ISO-8859-1');
 	$query="select * from farmacia where Usuario='$c'";
     $ndf->consulta($query);
     $d=$ndf->consulta_lista();
@@ -111,6 +112,7 @@ if ($_GET["var"]=="ingresarFarmacia") {
 	    echo "</div>";
 }
 if ($_GET["var"]=="actualizarFarmacia")	{
+	header('Content-Type: text/html; charset=ISO-8859-1');
 	$nomTabla=$_GET["tab"];
 	$idr=$_GET["id"];
 	if ($nomTabla!="usuarios") {
@@ -218,7 +220,7 @@ if (@$_GET["var"]=="ingresar") {
 		    }
 		    if ($ndf->nombrecampo($i)=="fecha_inicio" or $ndf->nombrecampo($i)=="fecha_fin") {
 		    	?>
-		        <label for="fecha"><?php echo $ndf->nombrecampo($i); ?>:<input type='text' name='<?php echo $ndf->nombrecampo($i); ?>' placeholder='<?php echo $ndf->nombrecampo($i); ?>' id="fecha" value="" /></label>
+		        <label><?php echo $ndf->nombrecampo($i); ?>:<input type='text' name='<?php echo $ndf->nombrecampo($i); ?>' placeholder='<?php echo $ndf->nombrecampo($i); ?>' id="fecha" value=""/></label>
 		    	<?php
 		    }
 	    }

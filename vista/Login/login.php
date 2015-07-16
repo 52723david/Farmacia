@@ -34,7 +34,7 @@ session_destroy();
   </div>
   <div class='login'>
     <h2>Accede a tu cuenta</h2>
-    <form action="../../controlador/admin1.php?va=loguin" method="post" name="form">
+    <form action="../../controlador/admin1.php?va=loguin&tipo=user" method="post" name="form">
      <table>
           <tr>
             <td><p></p></td>
@@ -44,13 +44,13 @@ session_destroy();
             <td><p></p></td>
             <td><input type="password" name="clave" placeholder="clave" required></td>
           </tr>
-          <tr>
+          <!--<tr>
             <td><p></p></td>
             <td><select name="tipo">
               <option value="user">Usuario</option>
               <option value="admin">Administrador</option>
             </select></td>
-          </tr>
+          </tr>-->
         </table>
         <tr>
             <td></td>

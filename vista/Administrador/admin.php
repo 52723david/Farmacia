@@ -108,6 +108,7 @@ if (@$_GET["var"]=="administradortodo") {
     echo "<br><br><br>";
 }
 if (@$_GET["var"]=="ingresar") {
+	header('Content-Type: text/html; charset=ISO-8859-1');
 	$nomb=$_GET["nom"];
 	$farma=$_GET["fa"];
 	//echo $c;

@@ -4,21 +4,21 @@
 	$ndf=new clase_mysql;
 	$ndf->conectar($db_name, $db_host, $db_user, $db_pasword);
 	//si el usuario tiene cuenta creada como user
-	if (@$_GET["va"]=="loguin" and $_POST['tipo']=="user") {
+	if (@$_GET["va"]=="loguin" and $_GET['tipo']=="user") {
 		$usuario1 = $_POST['usuario'];
 		$clave1 = $_POST['clave'];
 		$query="select * from usuarios where Usuario=MD5('$usuario1') and Password=MD5('$clave1')";
 		//echo "$query";
 		$ndf->consulta($query);
-		$ndf->validar($_POST['tipo']);
+		$ndf->validar($_GET['tipo']);
 	}
 	//si el usuario tiene cuenta creada como admin
-	if (@$_GET["va"]=="loguin" and $_POST['tipo']=="admin") {
+	if (@$_GET["va"]=="loguin" and $_GET['tipo']=="admin") {
 		$usuario1 = $_POST['usuario'];
 		$clave1 = $_POST['clave'];
 		$query="select * from administrador where Usuario=MD5('$usuario1') and Password=MD5('$clave1')";
 		$ndf->consulta($query);
-		$ndf->validar($_POST['tipo']);
+		$ndf->validar($_GET['tipo']);
 	}
 	//el usuario crea cuenta
 	if (@$_GET["va"]=="registrarse") {
