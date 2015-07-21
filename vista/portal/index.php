@@ -313,9 +313,9 @@
 			<nav class="menu">
 				<div class="rmm"  data-menu-style = "sapphire">
 		            <ul>
-		                <li><a href='#home'>Inicio</a></li>
-		                <li><a href='#about-me'>Ubicación</a></li>
-		                <li><a href='#blog'>Farmacias</a></li>
+		                <li><a href='index.php'>Inicio</a></li>
+		                <li><a href='#'>Ubicación</a></li>
+		                <li><a href='farmacias.php'>Farmacias</a></li>
 		               
 		            </ul>
 		        </div>
@@ -346,11 +346,10 @@
 				</div>
 			</section>	  
         
-            <section id="content" class="row-fluid">
-                    <section id="mapa" style="width: 50%; height: 60%; position: absolute;  overflow: hidden; -webkit-transform: translateZ(0px); ">
+            <aside id="content" class="row-fluid">
+                    <section id="mapa" style="width: 100%; height: 431px; position: relative: ;  overflow: hidden; -webkit-transform: translateZ(0px); ">
                     </section>
-                    <!--<a href="motion.html" target="_blank">Otras visualizaciones</a>-->
-        	</section>
+        	</aside>
                 
 
 			<footer>
