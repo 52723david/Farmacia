@@ -229,6 +229,7 @@
                         html += "<b>Sector:</b>&nbsp" + dataFarmacia.Sector;
                         html += "<br/>";
                         html += "<b>Telefono:</b>&nbsp" +dataFarmacia.Telefono;
+                        html += "<br><a href='../producto/index.php?var="+dataFarmacia.Id+"&va=especificacion'>Detalles</a>";
                         html += "<hr/>";
 
                         return html;

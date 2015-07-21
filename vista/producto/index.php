@@ -1,7 +1,19 @@
+<?php 
+include("../../modelo/confi.php"); 
+include("../../modelo/clase.php");
+$ndf=new clase_mysql;
+$ndf->conectar($db_name, $db_host, $db_user, $db_pasword);
+$c=$_GET['var'];
+$query="select * from farmacia where Id='$c'";
+$ndf->consulta($query);
+$d2=$ndf->consulta_lista();
+$nombre=$d2[1];
+//echo "$nombre";
+ ?>
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Master PC</title>
+<title>Productos</title>
 <html lang="es">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -52,22 +64,22 @@
 				});
 			</script>
 </head>
-<body>
+<body> 
 
 <!-- start header -->
 <div class="header_bg">
 <div class="wrap">
 	<div class="header">
 		<div class="logo">
-			<a href="index.php"><img src="images/logo.jpg" alt=""/> </a>
+			<a href="<?php echo "index.php?var=$c&va=especificacion"; ?>"><h1><?php echo $nombre; ?></h1></a>
 		</div>
 		
 	</div>
 	<div class="h_search">
-    		<form>
-    			<input type="text" value="">
-    			<input type="submit" value="">
-    		</form>
+    		<?php echo "<form id='buscador' name='buscador' method='post' action='index.php?var=$c&va=buscar'>"; ?>
+				<input type="text" name="busca"placeholder="Buscar..."> 
+				<input type="submit" value="Ir">
+   			</form>
 	</div>
 		<div class="clear"></div>
 </div>
@@ -79,10 +91,9 @@
 	<div class="header_sub">
 		<div class="h_menu">
 			<ul>
-				<li class="active"><a href="index.php">Inicio</a></li> |
-				<li><a href="detalles.php">Sobre Nosotros</a></li> |
-				<li><a href="#">Catálogo</a></li> |
-				<li><a href="#">Login</a></li> |
+				<li class="active"><a href="../portal/index.php">HOME</a></li> |
+				<?php echo "<li><a href='index.php?var=$c&va=especificacion'>Incio</a></li> |"; ?>
+				<?php echo "<li><a href='index.php?var=$c&va=catalogo'>Catálogo</a></li> |"; ?>
 				
 			</ul>
 		</div>
@@ -90,10 +101,9 @@
 	          <nav class="nav">	        	
 	    	    <a href="#" id="w3-menu-trigger"> </a>
 	                  <ul class="nav-list" style="">
-	            	        <li class="nav-item"><a class="active" href="index.php">Inicio</a></li>
-							<li class="nav-item"><a class="active" href="detalles.php">Sobre Nosotros</a></li>
-							<li class="nav-item"><a href="#">Catálogo</a></li>
-							<li class="nav-item"><a href="#">Login</a></li>
+	            	        <li class="active"><a href="../portal/index.php">HOME</a></li> |
+							<?php echo "<li><a href='index.php?var=$c&va=especificacion'>Incio</a></li> |"; ?>
+							<?php echo "<li><a href='index.php?var=$c&va=catalogo'>Catálogo</a></li> |"; ?>
 	                 </ul>
 	           </nav>
 	             <div class="search_box">
@@ -121,131 +131,127 @@
 <div class="wrap">	
 	<div class="main">
 		<!-- start grids_of_3 -->
+		<!--<div class="grids_of_3">-->
+			<?php 
+				$sql="select * from productos where Farmacia='$c'";
+				$ndf->consulta($sql);
+				$d=$ndf->consulta_lista();
+				if ($d>0) {
+				if ($_GET["va"]=="especificacion") {
+					$sql="select Id, Nombre, Foto, Precio, Oferta, Stock from productos where Oferta<>0 and Farmacia='$c' order by Nombre";
+					$ndf->consulta($sql);
+					$d=$ndf->consulta_lista();
+					$tama=count($d);
+					for ($i=0; $i < $tama; $i++) { 
+						$b=$d[$i];
+						$imagen=$d[$i+2];
+						//echo $imagen;
+              ?>
+			        <div class="grids_of_3">
+			        <div class="grid1_of_3">
+			   <?php
+						echo "<a href=''>";
+						$ruta="images/".$imagen;
+						//echo "$ruta";	
+				?>			
+							<h2><?php echo $d[$i+1]; ?></h2><br>
+							<h2><?php echo "<h2>Oferta: </h2>"; ?>$<?php echo $d[$i+4]; ?></h2><br>
+							<img src="<?php echo $ruta; ?>" width="400" height="250" alt=""/>
+							<div class="price">
+							<h4>Precio Original: $<?php echo $d[$i+3]; ?></h4>
+							<h4>Stock: $<?php echo $d[$i+5]; ?></h4>
+							</div>
+							<span class="b_btm"></span>
+						</a>
+					</div>
+					</div>
+              <?php
+              		$i=$i+5;
+                	}
+                }
+                if ($_GET["va"]=="catalogo") {
+					$sql="select Id, Nombre, Foto, Precio, Oferta, Stock from productos where Farmacia='$c' order by Nombre";
+					$ndf->consulta($sql);
+					$d=$ndf->consulta_lista();
+					$tama=count($d);
+					for ($i=0; $i < $tama; $i++) { 
+						$b=$d[$i];
+						$imagen=$d[$i+2];
+						//echo $imagen;
+              ?>
+			        <div class="grids_of_3">
+			        <div class="grid1_of_3">
+			   <?php
+						echo "<a href=''>";
+						$ruta="images/".$imagen;
+						//echo "$ruta";	
+				?>			
+							<h2><?php echo $d[$i+1]; ?></h2><br>
+							<h2><?php echo "<h2>Oferta: </h2>"; ?>$<?php echo $d[$i+4]; ?></h2><br>
+							<img src="<?php echo $ruta; ?>" width="400" height="250" alt=""/>
+							<div class="price">
+							<h4>Precio Original: $<?php echo $d[$i+3]; ?></h4>
+							<h4>Stock: $<?php echo $d[$i+5]; ?></h4>
+							</div>
+							<span class="b_btm"></span>
+						</a>
+					</div>
+					</div>
+              <?php
+              		$i=$i+5;
+                	}
+                }
+                if ($_GET["va"]=="buscar") {
+                $sql = "SELECT * FROM productos WHERE Nombre LIKE '%" .$_POST["busca"]. "%' and Farmacia='$c' ORDER BY Nombre";
+				$ndf->consulta($sql);
+				$d=$ndf->consulta_lista();
+				if ($d>0) {
+					$sql="select Id, Nombre, Foto, Precio, Oferta, Stock from productos where Nombre='" .$_POST["busca"]. "' and Farmacia='$c' order by Nombre";
+					$ndf->consulta($sql);
+					$d=$ndf->consulta_lista();
+					$tama=count($d);
+					for ($i=0; $i < $tama; $i++) { 
+						$b=$d[$i];
+						$imagen=$d[$i+2];
+						//echo $imagen;
+              ?>
+			        <div class="grids_of_3">
+			        <div class="grid1_of_3">
+			   <?php
+						echo "<a href=''>";
+						$ruta="images/".$imagen;
+						//echo "$ruta";	
+				?>			
+							<h2><?php echo $d[$i+1]; ?></h2><br>
+							<h2><?php echo "<h2>Oferta: </h2>"; ?>$<?php echo $d[$i+4]; ?></h2><br>
+							<img src="<?php echo $ruta; ?>" width="400" height="250" alt=""/>
+							<div class="price">
+							<h4>Precio Original: $<?php echo $d[$i+3]; ?></h4>
+							<h4>Stock: $<?php echo $d[$i+5]; ?></h4>
+							</div>
+							<span class="b_btm"></span>
+						</a>
+					</div>
+					</div>
+              <?php
+              		$i=$i+5;
+                	}
+		  		}else{
+		  				echo "<script>alert('NO HAY RESULTADOS EN LA BBDD')</script>";
+						echo "<script>location.href='index.php?var=$c&va=especificacion'</script>";
+				   		//$text = "NO HAY RESULTADOS EN LA BBDD";	
+		  		}
+                }
+				}else{
+					echo "<br><h2>Usted no cuenta con Productos en la base de datos para esta farmacia</h2><br><br>";
+				}
+			 ?>
+			<div class="clear"></div>
+		</div>
+	<!--</div>-->
+</div>
+</div>
 
-		<div class="grids_of_3">
-			<div class="grid1_of_3">
-				<a href="#">
-					<img src="images/img1.jpg" width="200" height="150" alt=""/>
-					<h3>Computadora de Escritorio</h3>
-					<div class="price">
-						<h4>$1100<span>Detalles</span></h4>
-					</div>
-					<span class="b_btm"></span>
-				</a>
-			</div>
-			<div class="grid1_of_3">
-				<a href="#">
-					<img src="images/img2.jpg"width="200" height="150" alt=""/>
-					<h3>Portatiles</h3>
-					<div class="price">
-						<h4>$1500<span>Detalles</span></h4>
-					</div>
-					<span class="b_btm"></span>
-				</a>
-			</div>
-			<div class="grid1_of_3">
-				<a href="#">
-					<img src="images/img3.jpg" width="200" height="150" alt=""/>
-					<h3>Auriculares</h3>
-					<div class="price">
-						<h4>$25<span>Detalles</span></h4>
-					</div>
-					<span class="b_btm"></span>
-				</a>
-			</div>
-			<div class="clear"></div>
-		</div>
-		
-		<div class="grids_of_3">
-			<div class="grid1_of_3">
-				<a href="#">
-					<img src="images/img4.jpg" width="200" height="150"  alt=""/>
-					<h3>Discos Externos</h3>
-					<div class="price">
-						<h4>$160<span>Detalles</span></h4>
-					</div>
-					<span class="b_btm"></span>
-				</a>
-			</div>
-			<div class="grid1_of_3">
-				<a href="#">
-					<img src="images/img5.jpg" width="200" height="150" alt=""/>
-					<h3>USB</h3>
-					<div class="price">
-						<h4>$15<span>Detalles</span></h4>
-					</div>
-					<span class="b_btm"></span>
-				</a>
-			</div>
-			<div class="grid1_of_3">
-				<a href="#">
-					<img src="images/img6.jpg" width="200" height="150" alt=""/>
-					<h3>Routers</h3>
-					<div class="price">
-						<h4>$250<span>Detalles</span></h4>
-					</div>
-					<span class="b_btm"></span>
-				</a>
-			</div>
-			
-			<div class="clear"></div>
-		</div>	
-		<!-- end grids_of_3 -->
-	</div>
-</div>
-</div>	
-<!-- start footer -->
-<div class="footer_bg">
-<div class="wrap">	
-	<div class="footer">
-		<!-- start grids_of_4 -->	
-		<div class="grids_of_4">
-			<div class="grid1_of_4">
-				<h4>Ventas destacadas</h4>
-				<ul class="f_nav">
-					<li><a href="">Willan Caraguay</a></li>
-					<li><a href="">Rolando Neira</a></li>
-					<li><a href="">David Bustamante</a></li>
-					<li><a href="">Diego Guevara</a></li>
-				</ul>
-			</div>
-			<div class="grid1_of_4">
-				<h4>Computadores de Mesa</h4>
-				<ul class="f_nav">
-					<li><a href="">Intel</a></li>
-					<li><a href="">Intel core I2 Duo</a></li>
-					<li><a href="">Intel core I3 Duo</a></li>
-					<li><a href="">Intel core I5 </a></li>
-					<li><a href="">Intel core I7</a></li>
-					
-				</ul>
-			</div>
-			<div class="grid1_of_4">
-				<h4>Computadores Portátiles</h4>
-				<ul class="f_nav">
-					<li><a href="">DELL</a></li>
-					<li><a href="">TOSHIBA</a></li>
-					<li><a href="">HP</a></li>
-					<li><a href="">ACER</a></li>
-					
-				</ul>
-			</div>
-			<div class="grid1_of_4">
-				<h4>Disco externos</h4>
-				<ul class="f_nav">
-					<li><a href="">Toshiba</a></li>
-					<li><a href="">Sansung</a></li>
-					<li><a href="">Force</a></li>
-					<li><a href="">LG</a></li>
-					
-				</ul>
-			</div>
-			<div class="clear"></div>
-		</div>
-	</div>
-</div>
-</div>	
-<!-- start footer -->
 <div class="footer_bg1">
 <div class="wrap">
 	<div class="footer">
@@ -268,7 +274,13 @@
 		 <a href="#" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 1;"></span></a>
 		<!--end scroll_top_btn -->
 		<div class="copy">
-			<p class="link">&copy;  Derechos Reservados| wicaraguay@gmail.com</p>
+			<p class="link">&copy;  Derechos Reservados| UTPL</p>
+			<?php $ruta="images/facebook.png"; ?>
+				<a href='https://www.facebook.com/'><img src="<?php echo "$ruta"; ?>" width="25" height="30"></a>
+			<?php $ruta="images/twitter.jpeg"; ?>
+				<a href='https://twitter.com/?lang=es/'><img src="<?php echo "$ruta"; ?>" width="25" height="30"></a>
+			<?php $ruta="images/instagram.jpeg"; ?>
+				<a href='https://instagram.com/'><img src="<?php echo "$ruta"; ?>" width="25" height="30"></a>
 		</div>
 		<div class="clear"></div>
 	</div>
