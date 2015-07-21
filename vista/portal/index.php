@@ -346,11 +346,10 @@
 				</div>
 			</section>	  
         
-            <section id="content" class="row-fluid">
-                    <section id="mapa" style="width: 50%; height: 60%; position: absolute;  overflow: hidden; -webkit-transform: translateZ(0px); ">
+            <aside id="content" class="row-fluid">
+                    <section id="mapa" style="width: 100%; height: 440px; position: relative: ;  overflow: hidden; -webkit-transform: translateZ(0px); ">
                     </section>
-                    <!--<a href="motion.html" target="_blank">Otras visualizaciones</a>-->
-        	</section>
+        	</aside>
                 
 
 			<footer>
