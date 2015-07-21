@@ -10,6 +10,7 @@ if ($user=="") {
     $ndf->conectar($db_name, $db_host, $db_user, $db_pasword);
     $c=$_GET['va'];
  ?>
+<!doctype html>
 <html>
 <head>
 	<title>Administrador</title>
@@ -18,13 +19,17 @@ if ($user=="") {
 
 	<link rel="stylesheet" type="text/css" href="estilos/estilos.css">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	
 	<meta name="viewport" content="width=device-width">
 	<link href="estilos/stacktable.css" rel="stylesheet" />
 	<link href="estilos/style.css" rel="stylesheet" />
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+	<script>
+		$(function () {
+		$("#fecha").datepicker();
+		});
+	</script>
 </head>
 
 <body>
@@ -47,11 +52,6 @@ if ($user=="") {
 		<li><?php echo "<a href='administrador.php?var=ingresarFarmacia&va=$c'>Crear Farmacia</a>"; ?></li>
 		<li><a href="../../controlador/admin1.php?va=salir">Salir</a></li>
 	</ul>
-</script>
-<script>
-$(function () {
-$("#fecha").datepicker();
-});
 </script>
 <?php 
 if ($_GET["var"]=="ver") {
@@ -220,7 +220,7 @@ if (@$_GET["var"]=="ingresar") {
 		    }
 		    if ($ndf->nombrecampo($i)=="fecha_inicio" or $ndf->nombrecampo($i)=="fecha_fin") {
 		    	?>
-		        <label><?php echo $ndf->nombrecampo($i); ?>:<input type='text' name='<?php echo $ndf->nombrecampo($i); ?>' placeholder='<?php echo $ndf->nombrecampo($i); ?>' id="fecha" value=""/></label>
+		        <label><?php echo $ndf->nombrecampo($i); ?>:<input type='text' name='<?php echo $ndf->nombrecampo($i); ?>' placeholder='<?php echo $ndf->nombrecampo($i); ?>' id="fecha"/></label>
 		    	<?php
 		    }
 	    }

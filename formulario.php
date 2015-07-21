@@ -14,7 +14,7 @@ $("#fecha").datepicker();
 </head>
 <body>
 <label>Fecha:
- <input type="text" id="fecha" value="" />
+ <input type="text" id="fecha"/>
 </label>
 </body>
 </html>

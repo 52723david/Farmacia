@@ -169,7 +169,7 @@ class clase_mysql{
 		echo "</table>";
 	}
 	function ver($r, $f){
-		echo "<table id='card-table' class='table' align='center' whidth=100% aligen='center' border=1>";
+		echo "<table id='card-table' class='table' align='center' whidth=100% aligen='center' border=0>";
 		echo "<tr>";
 		for ($i=0; $i < $this->numcampos() ; $i++) {
 		if ($this->nombrecampo($i)!="Id" and $this->nombrecampo($i)!="Foto" and $this->nombrecampo($i)!="Descripcion" and $this->nombrecampo($i)!="Zona" and $this->nombrecampo($i)!="Provincia" and $this->nombrecampo($i)!="Canton" and $this->nombrecampo($i)!="Latitud" and $this->nombrecampo($i)!="Longitud" and $this->nombrecampo($i)!="Usuario") {
