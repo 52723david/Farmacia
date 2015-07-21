@@ -347,7 +347,11 @@
 			</section>	  
         
             <aside id="content" class="row-fluid">
+<<<<<<< HEAD
                     <section id="mapa" style="width: 100%; height: 431px; position: relative: ;  overflow: hidden; -webkit-transform: translateZ(0px); ">
+=======
+                    <section id="mapa" style="width: 100%; height: 440px; position: relative: ;  overflow: hidden; -webkit-transform: translateZ(0px); ">
+>>>>>>> origin/master
                     </section>
         	</aside>
                 
